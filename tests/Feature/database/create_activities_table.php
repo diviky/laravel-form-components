@@ -21,6 +21,7 @@ class CreateActivitiesTable extends Migration
             $table->dateTime('date_e');
         });
     }
+
     /**
      * Reverse the migrations.
      *

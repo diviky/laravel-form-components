@@ -22,7 +22,7 @@ A set of Blade components to rapidly build forms with [Tailwind CSS v1](https://
 ## Requirements
 
 * PHP 8.0 or higher
-* Laravel 9.0
+* Laravel 9.0 or higher
 
 ## Installation
 

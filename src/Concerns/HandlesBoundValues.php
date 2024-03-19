@@ -1,6 +1,6 @@
 <?php
 
-namespace Diviky\LaravelFormComponents\Components;
+namespace Diviky\LaravelFormComponents\Concerns;
 
 use DateTimeInterface;
 use Diviky\LaravelFormComponents\FormDataBinder;
@@ -72,13 +72,13 @@ trait HandlesBoundValues
      */
     private function formatDateTime(Model $model, string $key, DateTimeInterface $date)
     {
-        if (! config('form-components.use_eloquent_date_casting')) {
+        if (!config('form-components.use_eloquent_date_casting')) {
             return $date;
         }
 
         $cast = $model->getCasts()[$key] ?? null;
 
-        if (! $cast || $cast === 'date' || $cast === 'datetime') {
+        if (!$cast || $cast === 'date' || $cast === 'datetime') {
             return Carbon::instance($date)->toJSON();
         }
 
@@ -113,7 +113,7 @@ trait HandlesBoundValues
      */
     private function getAttachedKeysFromRelation($bind, string $name): ?array
     {
-        if (! $bind instanceof Model) {
+        if (!$bind instanceof Model) {
             return data_get($bind, $name);
         }
 

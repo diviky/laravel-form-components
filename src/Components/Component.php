@@ -46,7 +46,7 @@ abstract class Component extends BaseComponent
      */
     public function isNotWired(): bool
     {
-        return ! $this->isWired();
+        return !$this->isWired();
     }
 
     /**
@@ -80,7 +80,7 @@ abstract class Component extends BaseComponent
      */
     protected function generateIdByName(): string
     {
-        return 'auto_id_'.$this->name;
+        return 'auto_id_' . $this->name;
     }
 
     /**

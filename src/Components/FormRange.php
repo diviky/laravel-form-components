@@ -2,6 +2,9 @@
 
 namespace Diviky\LaravelFormComponents\Components;
 
+use Diviky\LaravelFormComponents\Concerns\HandlesDefaultAndOldValue;
+use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
+
 class FormRange extends Component
 {
     use HandlesDefaultAndOldValue;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Diviky\LaravelFormComponents\Components;
+namespace Diviky\LaravelFormComponents\Concerns;
 
 use Illuminate\Contracts\Support\MessageBag;
 use Illuminate\Support\Facades\View;
@@ -41,6 +41,6 @@ trait HandlesValidationErrors
 
         $errorBag = $this->getErrorBag($bag);
 
-        return $errorBag->has($name) || $errorBag->has($name.'.*');
+        return $errorBag->has($name) || $errorBag->has($name . '.*');
     }
 }

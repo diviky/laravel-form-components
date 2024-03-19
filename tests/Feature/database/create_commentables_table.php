@@ -19,6 +19,7 @@ class CreateCommentablesTable extends Migration
             $table->morphs('commentable');
         });
     }
+
     /**
      * Reverse the migrations.
      *

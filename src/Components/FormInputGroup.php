@@ -2,6 +2,8 @@
 
 namespace Diviky\LaravelFormComponents\Components;
 
+use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
+
 class FormInputGroup extends Component
 {
     use HandlesValidationErrors;

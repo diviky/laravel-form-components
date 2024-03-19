@@ -2,6 +2,8 @@
 
 namespace Diviky\LaravelFormComponents\Components;
 
+use Diviky\LaravelFormComponents\Concerns\HandlesBoundValues;
+use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -43,7 +45,7 @@ class FormCheckbox extends Component
             $this->checked = in_array($value, Arr::wrap($oldData));
         }
 
-        if (! session()->hasOldInput() && $this->isNotWired()) {
+        if (!session()->hasOldInput() && $this->isNotWired()) {
             $boundValue = $this->getBoundValue($bind, $inputName);
 
             if ($boundValue instanceof Arrayable) {
@@ -56,7 +58,7 @@ class FormCheckbox extends Component
                 return;
             }
 
-            $this->checked = is_null($boundValue) ? $default : $boundValue;
+            $this->checked = is_null($boundValue) ? $default : ($boundValue == $value);
         }
     }
 
@@ -65,6 +67,6 @@ class FormCheckbox extends Component
      */
     protected function generateIdByName(): string
     {
-        return 'auto_id_'.$this->name.'_'.$this->value;
+        return 'auto_id_' . $this->name . '_' . $this->value;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Diviky\LaravelFormComponents\Components;
 
+use Diviky\LaravelFormComponents\Concerns\HandlesBoundValues;
+use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -64,7 +66,7 @@ class FormSelect extends Component
 
         $this->multiple = $multiple;
         $this->showErrors = $showErrors;
-        $this->floating = $floating && ! $multiple;
+        $this->floating = $floating && !$multiple;
     }
 
     public function isSelected($key): bool

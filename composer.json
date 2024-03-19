@@ -38,12 +38,8 @@
         "symfony/http-foundation": "^6.0"
     },
     "require-dev": {
-        "livewire/livewire": "^2.12",
-        "mockery/mockery": "^1.4.4",
-        "nesbot/carbon": "^2.66",
-        "orchestra/testbench": "^8.21",
-        "orchestra/testbench-browser-kit": "^7.0 || ^8.0",
-        "phpunit/phpunit": "^10.5",
+        "diviky/code-analysis": "^2.0",
+        "livewire/livewire": "^3.4",
         "spatie/laravel-translatable": "^6.0",
         "symfony/dom-crawler": "^6.0"
     },
@@ -62,14 +58,18 @@
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpro/grumphp": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
         "laravel": {
             "providers": [
-                "Diviky\\LaravelFormComponents\\Support\\ServiceProvider"
+                "Diviky\\LaravelFormComponents\\Providers\\LaravelServiceProvider"
             ]
         }
     }

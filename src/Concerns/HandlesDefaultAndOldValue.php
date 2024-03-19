@@ -1,6 +1,6 @@
 <?php
 
-namespace Diviky\LaravelFormComponents\Components;
+namespace Diviky\LaravelFormComponents\Concerns;
 
 trait HandlesDefaultAndOldValue
 {
@@ -18,7 +18,7 @@ trait HandlesDefaultAndOldValue
 
         $inputName = static::convertBracketsToDots($name);
 
-        if (! $language) {
+        if (!$language) {
             $boundValue = $this->getBoundValue($bind, $inputName);
 
             $default = is_null($boundValue) ? $default : $boundValue;

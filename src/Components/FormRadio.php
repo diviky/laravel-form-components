@@ -2,6 +2,9 @@
 
 namespace Diviky\LaravelFormComponents\Components;
 
+use Diviky\LaravelFormComponents\Concerns\HandlesBoundValues;
+use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
+
 class FormRadio extends Component
 {
     use HandlesBoundValues;
@@ -34,10 +37,10 @@ class FormRadio extends Component
             $this->checked = old($inputName) == $value;
         }
 
-        if (! session()->hasOldInput() && $this->isNotWired()) {
+        if (!session()->hasOldInput() && $this->isNotWired()) {
             $boundValue = $this->getBoundValue($bind, $inputName);
 
-            if (! is_null($boundValue)) {
+            if (!is_null($boundValue)) {
                 $this->checked = $boundValue == $this->value;
             } else {
                 $this->checked = $default;
@@ -50,6 +53,6 @@ class FormRadio extends Component
      */
     protected function generateIdByName(): string
     {
-        return 'auto_id_'.$this->name.'_'.$this->value;
+        return 'auto_id_' . $this->name . '_' . $this->value;
     }
 }

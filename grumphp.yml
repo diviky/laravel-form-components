@@ -1,0 +1,71 @@
+grumphp:
+  extensions:
+    - YieldStudio\GrumPHPLaravelPint\ExtensionLoader
+  ascii:
+    failed: null
+    succeeded: null
+  process_timeout: 600
+  parallel:
+    enabled: true
+    max_workers: 10
+  fixer:
+    enabled: true
+    fix_by_default: true
+  testsuites:
+    style:
+      tasks:
+        - composer
+        - phpmd
+        - laravel_pint
+    static:
+      tasks:
+        - psalm
+  tasks:
+    composer:
+      metadata: { priority: 700 }
+    git_blacklist:
+      keywords: [die(, var_dump(, exit;]
+      metadata: { priority: 500 }
+    git_branch_name:
+      whitelist:
+        - "/JIRA-\\w+/"
+        - "/jira-\\w+/"
+        - "/feature-\\w+/"
+        - "/hotfix-\\w+/"
+        - "/bugfix-\\w+/"
+        - "/issue-\\w+/"
+        - "/task-\\w+/"
+        - "/release-\\w+/"
+        - 'development'
+        - 'master'
+        - 'deployment'
+        - '2.x'
+        - '3.x'
+        - '4.x'
+      additional_modifiers: ''
+      allow_detached_head: true
+    phpmd:
+      whitelist_patterns: ['/^src(.*)/', '/^app(.*)/', '/^config(.*)/', '/^recources(.*)/']
+      ruleset: ['ruleset.xml']
+      report_format: ansi
+      metadata: { priority: 200 }
+    laravel_pint:
+      metadata: { priority: 500 }
+      config: pint.json
+      preset: laravel
+      auto_fix: false
+      triggered_by:
+        - php
+    psalm:
+      config: psalm.xml
+      ignore_patterns: ['*.blade.php']
+      no_cache: true
+      output_format: console
+      threads: 5
+      triggered_by: ['php']
+      show_info: false
+      metadata: { priority: 400 }
+    # composer_script:
+    #   script: test
+    #   triggered_by: [php]
+    # phpunit:

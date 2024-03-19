@@ -10,7 +10,7 @@ class BootstrapTest extends TestCase
     {
         parent::setUp();
 
-        if (! in_array(config('form-components.framework'), ['bootstrap-4', 'bootstrap-5'])) {
+        if (!in_array(config('form-components.framework'), ['bootstrap-4', 'bootstrap-5'])) {
             $this->markTestSkipped('Other framework configured');
         }
     }
@@ -38,7 +38,7 @@ class BootstrapTest extends TestCase
         $this->assertStringStartsWith('auto_id_', $inputId);
 
         $page
-            ->seeElement('input[id="'.$inputId.'"]')
-            ->seeElement('label[for="'.$inputId.'"]');
+            ->seeElement('input[id="' . $inputId . '"]')
+            ->seeElement('label[for="' . $inputId . '"]');
     }
 }
