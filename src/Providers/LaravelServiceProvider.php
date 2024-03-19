@@ -29,8 +29,6 @@ class LaravelServiceProvider extends BaseServiceProvider
         $framework = config('form-components.framework');
         $prefix = config('form-components.prefix');
 
-        dd($framework);
-
         Blade::directive('bind', function ($bind) {
             return '<?php app(\Diviky\LaravelFormComponents\FormDataBinder::class)->bind(' . $bind . '); ?>';
         });

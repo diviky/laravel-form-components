@@ -18,12 +18,6 @@
         <pluginClass class="Psalm\LaravelPlugin\Plugin"/>
     </plugins>
     <issueHandlers>
-        <UndefinedClass>
-            <errorLevel type="suppress">
-                <referencedClass name="App\Http\Controllers\Controller"/>
-                <referencedClass name="App\Models\User"/>
-            </errorLevel>
-        </UndefinedClass>
         <PropertyNotSetInConstructor>
             <errorLevel type="suppress">
                 <directory name="src"/>
@@ -54,15 +48,5 @@
                 <directory name="src"/>
             </errorLevel>
         </UndefinedMagicPropertyAssignment>
-        <MoreSpecificReturnType>
-            <errorLevel type="suppress">
-                <file name="src/ThemeViewFinder.php"/>
-            </errorLevel>
-        </MoreSpecificReturnType>
-        <LessSpecificReturnStatement>
-            <errorLevel type="suppress">
-                <file name="src/ThemeViewFinder.php"/>
-            </errorLevel>
-        </LessSpecificReturnStatement>
     </issueHandlers>
 </psalm>
