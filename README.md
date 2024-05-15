@@ -69,7 +69,7 @@ If you're using Tailwind, make sure the right plugin ([v1](https://github.com/ta
 
 At first sight, generating HTML forms with PHP looks great. PHP's power can make it less repetitive, and it's nice to resolve input values and validation states right from your PHP code. Still, it gets harder to keep your PHP code clean and neat whenever your forms get more complex. Often you end up with lots of custom code, writing extensions, and overriding defaults, just for the sake of adding some small thing to your form.
 
-After years of trying all sorts of form builders, it feels like just writing most of the form in HTML is the most versatile solution. You can add helper texts, icons, tooltips, popovers, custom sections, and JavaScript integrations however and wherever you like. The power of [Laravel Blade Components](https://laravel.com/docs/8.x/blade) allows us to add all kinds of features without bringing the whole form-building process into PHP.
+After years of trying all sorts of form builders, it feels like just writing most of the form in HTML is the most versatile solution. You can add helper texts, icons, tooltips, popovers, custom sections, and JavaScript integrations however and wherever you like. The power of [Laravel Blade Components](https://laravel.com/docs/10.x/blade) allows us to add all kinds of features without bringing the whole form-building process into PHP.
 
 Let's take a look at this `x-form` example. The `action` attribute is optional, but you can pass a hard-coded, primitive value to the component using a simple HTML attribute. Likewise, PHP expressions and variables can be passed to attributes using the `:` prefix. Do you need Alpine.js or VueJS directives? No problem!
 
@@ -146,7 +146,7 @@ In the example above, where `$video` is an Eloquent model, the default value wil
 
 #### Date Casting
 
-If you use Eloquent's [Date Casting](https://laravel.com/docs/8.x/eloquent-mutators#date-casting) feature, you can use the date attributes in your forms by setting the `use_eloquent_date_casting` configuration key to `true`. For compatibility reasons, this is disabled by default.
+If you use Eloquent's [Date Casting](https://laravel.com/docs/10.x/eloquent-mutators#date-casting) feature, you can use the date attributes in your forms by setting the `use_eloquent_date_casting` configuration key to `true`. For compatibility reasons, this is disabled by default.
 
 ```php
 return [
@@ -533,10 +533,6 @@ Please see [CHANGELOG](CHANGELOG.md) for more information about what has changed
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-### Security
-
-If you discover any security related issues, please email pascal@protone.media instead of using the issue tracker.
 
 ## License
 
