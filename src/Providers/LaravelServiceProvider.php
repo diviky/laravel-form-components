@@ -45,8 +45,6 @@ class LaravelServiceProvider extends BaseServiceProvider
             return '<?php app(\Diviky\LaravelFormComponents\FormDataBinder::class)->endWire(); ?>';
         });
 
-        Blade::anonymousComponentPath(__DIR__ . '/../../resources/views/components/' . $framework, $prefix);
-
         Collection::make(config('form-components.components'))->each(
             function (array $component, string $alias) use ($prefix, $framework): void {
                 if (isset($component['class'])) {

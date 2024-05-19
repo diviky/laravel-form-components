@@ -3,10 +3,10 @@
 use Diviky\LaravelFormComponents\Components;
 
 return [
-    'prefix' => '',
+    'prefix' => env('COMPONENTS_PREFIX'),
 
     /** tailwind | tailwind-2 | tailwind-forms-simple | bootstrap-4 | bootstrap-5 */
-    'framework' => 'tailwind',
+    'framework' => env('COMPONENTS_FRAMEWORK', 'bootstrap-4'),
 
     'use_eloquent_date_casting' => false,
 
