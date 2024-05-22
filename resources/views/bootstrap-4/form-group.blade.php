@@ -1,13 +1,13 @@
-<div {!! $attributes->merge(['class' => 'form-group '  . ($hasError($name) ? 'is-invalid' : '')]) !!}>
+<div {!! $attributes->merge(['class' => 'form-group ' . ($hasError($name) ? 'is-invalid' : '')]) !!}>
     <x-form-label :label="$label" />
 
-    <div class="@if($inline) d-flex flex-row flex-wrap inline-space @endif">
+    <div class="@if ($inline) d-flex flex-row flex-wrap inline-space @endif">
         {!! $slot !!}
     </div>
 
     {!! $help ?? null !!}
 
-    @if($hasErrorAndShow($name))
-        <x-form-errors :name="$name" class="d-block" />
+    @if ($hasErrorAndShow($name))
+        <x-form-errors :name="$name" />
     @endif
 </div>

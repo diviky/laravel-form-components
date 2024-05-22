@@ -1,4 +1,4 @@
-<div class="@if ($type === 'hidden') d-none @else form-group @endif">
+<div class="@if ($type === 'hidden') d-none @elseif(!isset($prepend) && !isset($append)) form-group @endif">
     <x-form-label :label="$label" :for="$attributes->get('id') ?: $id()" />
 
     <div
