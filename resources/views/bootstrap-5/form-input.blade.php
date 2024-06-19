@@ -1,43 +1,55 @@
-@if($type === 'hidden') <div class="d-none"> @endif
-@if($floating) <div class="form-floating"> @endif
+<div class="@if ($type === 'hidden') d-none @elseif(!isset($prepend) && !isset($append)) form-group @endif">
+    @if ($floating)
+        <div class="form-floating">
+    @endif
 
-    @if(!$floating)
+    @if (!$floating)
         <x-form-label :label="$label" :for="$attributes->get('id') ?: $id()" />
     @endif
 
-    <input
-        {!! $attributes->merge(['class' => 'form-control' . ($type === 'color' ? ' form-control-color' : '') . ($hasError($name) ? ' is-invalid' : '')]) !!}
+    <div
+        class="@if (isset($prepend) || isset($append)) input-group @endif @isset($icon) input-icon @endisset">
+        @isset($prepend)
+            <div class="input-group-text">
+                {!! $prepend !!}
+            </div>
+        @endisset
 
-        type="{{ $type }}"
+        @isset($icon)
+            <span class="input-icon-addon">
+                {!! $icon !!}
+            </span>
+        @endisset
 
-        @if($isWired())
-            wire:model{!! $wireModifier() !!}="{{ $name }}"
+        <input {!! $attributes->merge([
+            'class' =>
+                'form-control' . ($type === 'color' ? ' form-control-color' : '') . ($hasError($name) ? ' is-invalid' : ''),
+        ]) !!} type="{{ $type }}"
+            @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}"
         @else
-            value="{{ $value ?? ($type === 'color' ? '#000000' : '') }}"
+            value="{{ $value ?? ($type === 'color' ? '#000000' : '') }}" @endif
+            name="{{ $name }}" @if ($label && !$attributes->get('id')) id="{{ $id() }}" @endif
+            @if ($floating && !$attributes->get('placeholder')) placeholder="&nbsp;" @endif />
+
+        @isset($append)
+            <div class="input-group-text">
+                {!! $append !!}
+            </div>
+        @endisset
+
+        @if ($floating)
+            <x-form-label :label="$label" :for="$attributes->get('id') ?: $id()" />
         @endif
 
-        name="{{ $name }}"
-
-        @if($label && !$attributes->get('id'))
-            id="{{ $id() }}"
-        @endif
-
-        {{--  Placeholder is required as of writing  --}}
-        @if($floating && !$attributes->get('placeholder'))
-            placeholder="&nbsp;"
-        @endif
-    />
-
-    @if($floating)
-        <x-form-label :label="$label" :for="$attributes->get('id') ?: $id()" />
+        @if ($floating)
+    </div>
     @endif
 
-@if($floating) </div> @endif
+    {!! $help ?? null !!}
 
-{!! $help ?? null !!}
+    @if ($hasErrorAndShow($name))
+        <x-form-errors :name="$name" />
+    @endif
+</div>
 
-@if($hasErrorAndShow($name))
-    <x-form-errors :name="$name" />
-@endif
-
-@if($type === 'hidden') </div> @endif
+</div>
