@@ -23,7 +23,10 @@ class Form extends Component
      *
      * @return void
      */
-    public function __construct(string $method = 'POST')
+    public function __construct(
+        string $method = 'POST',
+        public bool $hasFiles = false,
+        public bool $spellcheck = false,)
     {
         $this->method = strtoupper($method);
 

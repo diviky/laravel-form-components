@@ -1,20 +1,21 @@
-<form
-    method="{{ $spoofMethod ? 'POST' : $method }}"
-    {!! $attributes->merge(['class' => $hasError() ? 'needs-validation' : '']) !!}
->
+<form method="{{ $spoofMethod ? 'POST' : $method }}" {!! $attributes->merge(['class' => $hasError() ? 'needs-validation' : '']) !!}
+    @if ($hasFiles) enctype="multipart/form-data" @endif
+    @unless ($spellcheck)
+        spellcheck="false"
+    @endunless>
     <style>
-        .inline-space > :not(template) {
+        .inline-space> :not(template) {
             margin-right: 1.25rem;
         }
     </style>
 
-@unless(in_array($method, ['HEAD', 'GET', 'OPTIONS']))
-    @csrf
-@endunless
+    @unless (in_array($method, ['HEAD', 'GET', 'OPTIONS']))
+        @csrf
+    @endunless
 
-@if($spoofMethod)
-    @method($method)
-@endif
+    @if ($spoofMethod)
+        @method($method)
+    @endif
 
     {!! $slot !!}
 </form>

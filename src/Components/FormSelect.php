@@ -7,17 +7,21 @@ use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Diviky\LaravelFormComponents\Concerns\GetsSelectOptionProperties;
 
 class FormSelect extends Component
 {
     use HandlesBoundValues;
     use HandlesValidationErrors;
+    use GetsSelectOptionProperties;
 
     public string $name;
 
     public string $label;
 
-    public $options;
+    public array|Collection $options;
 
     public $selectedKey;
 
@@ -42,7 +46,11 @@ class FormSelect extends Component
         bool $showErrors = true,
         bool $manyRelation = false,
         bool $floating = false,
-        string $placeholder = ''
+        string $placeholder = '',
+        public ?string $valueField = null,
+        public ?string $labelField = null,
+        public ?string $disabledField = null,
+        public ?string $childrenField = null,
     ) {
         $this->name = $name;
         $this->label = $label;
@@ -67,6 +75,13 @@ class FormSelect extends Component
         $this->multiple = $multiple;
         $this->showErrors = $showErrors;
         $this->floating = $floating && !$multiple;
+
+        $this->valueField = $valueField ?? 'id';
+        $this->labelField = $labelField ?? 'name';
+        $this->disabledField = $disabledField ?? 'disabled';
+        $this->childrenField = $childrenField ?? 'children';
+
+        $this->options = $this->normalizeOptions($options);
     }
 
     public function isSelected($key): bool
@@ -85,5 +100,29 @@ class FormSelect extends Component
         }
 
         return is_array($this->selectedKey) ? empty($this->selectedKey) : is_null($this->selectedKey);
+    }
+
+    protected function normalizeOptions(array|Collection $options): Collection
+    {
+        return collect($options)
+            ->map(function ($value, $key) {
+                // If the key is not numeric, we're going to assume this is the value.
+                if (! is_numeric($key)) {
+                    return [
+                        $this->valueField => $key,
+                        $this->labelField => $value,
+                    ];
+                }
+
+                // If the value is a simple value, we need to convert it to an array.
+                if (! is_iterable($value) && ! $value instanceof Model) {
+                    return [
+                        $this->valueField => $value,
+                        $this->labelField => $value,
+                    ];
+                }
+
+                return $value;
+            });
     }
 }

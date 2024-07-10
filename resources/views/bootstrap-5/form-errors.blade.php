@@ -1,5 +1,9 @@
 @error($name, $bag)
-    <div {!! $attributes->merge(['class' => 'invalid-feedback']) !!}>
-        {{ $message }}
-    </div>
-@enderror
+    <{{ $tag }} {!! $attributes->merge(['class' => 'invalid-feedback', 'id' => "{$inputId}-error"]) !!}>
+        @if ($slot->isEmpty())
+            {{ $message }}
+        @else
+            {{ $slot }}
+        @endif
+        </{{ $tag }}>
+    @enderror

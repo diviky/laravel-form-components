@@ -27,13 +27,33 @@
                 </option>
             @endif
 
-            @forelse($options as $key => $option)
-                <option value="{{ $key }}" @if($isSelected($key)) selected="selected" @endif>
-                    {{ $option }}
+            {!! $slot !!}
+
+        @foreach($options as $key => $option)
+            @if ($optionIsOptGroup($option))
+                <optgroup label="{{ $optionLabel($option) }}">
+                    @foreach ($optionChildren($option) as $child)
+                    <option
+                        value="{{ $optionValue($child) }}"
+                        @selected($isSelected($optionValue($child)))
+                        @disabled($optionIsDisabled($child))
+                    >
+                        {{ $optionLabel($child) }}
+                    </option>
+                    @endforeach
+                </optgroup>
+            @else
+                <option
+                    value="{{ $optionValue($option) }}"
+                    @selected($isSelected($optionValue($option)))
+                    @disabled($optionIsDisabled($option))
+                >
+                    {{ $optionLabel($option) }}
                 </option>
-            @empty
-                {!! $slot !!}
-            @endforelse
+            @endif
+        @endforeach
+
+        {{ $append ?? '' }}
         </select>
     </label>
 
