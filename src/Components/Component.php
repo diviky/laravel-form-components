@@ -2,12 +2,15 @@
 
 namespace Diviky\LaravelFormComponents\Components;
 
+use Diviky\LaravelFormComponents\Concerns\HasExtraAttributes;
 use Diviky\LaravelFormComponents\FormDataBinder;
 use Illuminate\Support\Str;
 use Illuminate\View\Component as BaseComponent;
 
 abstract class Component extends BaseComponent
 {
+    use HasExtraAttributes;
+
     /**
      * ID for this component.
      *
@@ -26,7 +29,7 @@ abstract class Component extends BaseComponent
 
         $framework = config('form-components.framework');
 
-        return str_replace('{framework}', $framework, $config['view']);
+        return (string) str_replace('{framework}', $framework, $config['view']);
     }
 
     /**
@@ -34,7 +37,7 @@ abstract class Component extends BaseComponent
      */
     public function isWired(): bool
     {
-        if ($this->attributes && count($this->attributes->whereStartsWith('wire:model')->getIterator())) {
+        if (isset($this->attributes) && count($this->attributes->whereStartsWith('wire:model')->getIterator())) {
             return false;
         }
 
@@ -56,7 +59,7 @@ abstract class Component extends BaseComponent
     {
         $modifier = app(FormDataBinder::class)->getWireModifier();
 
-        return $modifier ? ".{$modifier}" : null;
+        return isset($modifier) ? ".{$modifier}" : null;
     }
 
     /**

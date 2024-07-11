@@ -15,7 +15,6 @@ grumphp:
     style:
       tasks:
         - composer
-        - phpmd
         - laravel_pint
     static:
       tasks:
@@ -44,11 +43,6 @@ grumphp:
         - '4.x'
       additional_modifiers: ''
       allow_detached_head: true
-    phpmd:
-      whitelist_patterns: ['/^src(.*)/', '/^app(.*)/', '/^config(.*)/', '/^recources(.*)/']
-      ruleset: ['ruleset.xml']
-      report_format: ansi
-      metadata: { priority: 200 }
     laravel_pint:
       metadata: { priority: 500 }
       config: pint.json
@@ -65,7 +59,3 @@ grumphp:
       triggered_by: ['php']
       show_info: false
       metadata: { priority: 400 }
-    # composer_script:
-    #   script: test
-    #   triggered_by: [php]
-    # phpunit:

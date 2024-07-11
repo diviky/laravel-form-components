@@ -6,6 +6,8 @@ use Diviky\LaravelFormComponents\Concerns\HandlesBoundValues;
 use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 
 class FormCheckbox extends Component
@@ -32,12 +34,15 @@ class FormCheckbox extends Component
         $value = 1,
         $bind = null,
         bool $default = false,
-        bool $showErrors = true
+        bool $showErrors = true,
+        // Extra attributes
+        HtmlString|array|string|Collection|null $extraAttributes = null,
     ) {
         $this->name = $name;
         $this->label = $label;
         $this->value = $value;
         $this->showErrors = $showErrors;
+        $this->setExtraAttributes($extraAttributes);
 
         $inputName = static::convertBracketsToDots(Str::before($name, '[]'));
 

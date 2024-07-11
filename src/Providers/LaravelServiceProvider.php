@@ -12,7 +12,7 @@ class LaravelServiceProvider extends BaseServiceProvider
     /**
      * Bootstrap the application services.
      */
-    public function boot()
+    public function boot(): void
     {
         if ($this->app->runningInConsole()) {
             $this->console();
@@ -21,7 +21,6 @@ class LaravelServiceProvider extends BaseServiceProvider
         $this->bootBalde();
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'form-components');
-
     }
 
     protected function bootBalde(): self
@@ -72,7 +71,7 @@ class LaravelServiceProvider extends BaseServiceProvider
     /**
      * Register the application services.
      */
-    public function register()
+    public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../../config/config.php', 'form-components');
 

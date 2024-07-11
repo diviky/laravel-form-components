@@ -4,6 +4,8 @@ namespace Diviky\LaravelFormComponents\Components;
 
 use Diviky\LaravelFormComponents\Concerns\HandlesDefaultAndOldValue;
 use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
+use Illuminate\Support\Collection;
+use Illuminate\Support\HtmlString;
 
 class FormRange extends Component
 {
@@ -27,11 +29,13 @@ class FormRange extends Component
         $bind = null,
         $default = null,
         $language = null,
-        bool $showErrors = true
+        bool $showErrors = true,
+        string|HtmlString|array|Collection|null $extraAttributes = null,
     ) {
         $this->name = $name;
         $this->label = $label;
         $this->showErrors = $showErrors;
+        $this->setExtraAttributes($extraAttributes);
 
         if ($language) {
             $this->name = "{$name}[{$language}]";

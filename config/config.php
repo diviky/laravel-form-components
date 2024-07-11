@@ -78,5 +78,10 @@ return [
             'view' => 'form-components::{framework}.form-textarea',
             'class' => Components\FormTextarea::class,
         ],
+
+        'timezone-select' => [
+            'view' => 'form-components::{framework}.form-select',
+            'class' => Components\TimezoneSelect::class,
+        ],
     ],
 ];

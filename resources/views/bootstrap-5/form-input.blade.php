@@ -21,10 +21,10 @@
             </span>
         @endisset
 
-        <input {!! $attributes->merge([
+        <input {!! $attributes->except(['extra-attributes'])->merge([
             'class' =>
                 'form-control' . ($type === 'color' ? ' form-control-color' : '') . ($hasError($name) ? ' is-invalid' : ''),
-        ]) !!} type="{{ $type }}"
+        ]) !!} {{ $extraAttributes ?? '' }} type="{{ $type }}"
             @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}"
         @else
             value="{{ $value ?? ($type === 'color' ? '#000000' : '') }}" @endif

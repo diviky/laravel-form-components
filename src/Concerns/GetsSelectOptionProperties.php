@@ -57,7 +57,7 @@ trait GetsSelectOptionProperties
 
         return $children instanceof Collection
             ? $children->isNotEmpty()
-            : ! empty($children);
+            : !empty($children);
     }
 
     protected function optionProperty($option, $field, $default = null)

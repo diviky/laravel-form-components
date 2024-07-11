@@ -20,8 +20,7 @@ class FormErrors extends Component
         string $bag = 'default',
         public ?string $tag = null,
         public ?string $inputId = null,
-    )
-    {
+    ) {
         $this->name = static::convertBracketsToDots(Str::before($name, '[]'));
         $this->inputId = $inputId ?? $this->name;
         $this->tag = $tag ?? 'div';

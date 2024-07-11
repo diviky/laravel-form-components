@@ -4,6 +4,8 @@ namespace Diviky\LaravelFormComponents\Components;
 
 use Diviky\LaravelFormComponents\Concerns\HandlesDefaultAndOldValue;
 use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
+use Illuminate\Support\Collection;
+use Illuminate\Support\HtmlString;
 
 class FormInput extends Component
 {
@@ -33,13 +35,15 @@ class FormInput extends Component
         $default = null,
         $language = null,
         bool $showErrors = true,
-        bool $floating = false
+        bool $floating = false,
+        string|HtmlString|array|Collection|null $extraAttributes = null,
     ) {
         $this->name = $name;
         $this->label = $label;
         $this->type = $type;
         $this->showErrors = $showErrors;
         $this->floating = $floating && $type !== 'hidden';
+        $this->setExtraAttributes($extraAttributes);
 
         if ($language) {
             $this->name = "{$name}[{$language}]";

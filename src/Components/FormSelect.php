@@ -2,20 +2,21 @@
 
 namespace Diviky\LaravelFormComponents\Components;
 
+use Diviky\LaravelFormComponents\Concerns\GetsSelectOptionProperties;
 use Diviky\LaravelFormComponents\Concerns\HandlesBoundValues;
 use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
 use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Diviky\LaravelFormComponents\Concerns\GetsSelectOptionProperties;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
 
 class FormSelect extends Component
 {
+    use GetsSelectOptionProperties;
     use HandlesBoundValues;
     use HandlesValidationErrors;
-    use GetsSelectOptionProperties;
 
     public string $name;
 
@@ -44,19 +45,19 @@ class FormSelect extends Component
         $default = null,
         bool $multiple = false,
         bool $showErrors = true,
-        bool $manyRelation = false,
         bool $floating = false,
         string $placeholder = '',
         public ?string $valueField = null,
         public ?string $labelField = null,
         public ?string $disabledField = null,
         public ?string $childrenField = null,
+        string|HtmlString|array|Collection|null $extraAttributes = null,
     ) {
         $this->name = $name;
         $this->label = $label;
         $this->options = $options;
-        $this->manyRelation = $manyRelation;
         $this->placeholder = $placeholder;
+        $this->setExtraAttributes($extraAttributes);
 
         if ($this->isNotWired()) {
             $inputName = static::convertBracketsToDots(Str::before($name, '[]'));
@@ -107,7 +108,7 @@ class FormSelect extends Component
         return collect($options)
             ->map(function ($value, $key) {
                 // If the key is not numeric, we're going to assume this is the value.
-                if (! is_numeric($key)) {
+                if (!is_numeric($key)) {
                     return [
                         $this->valueField => $key,
                         $this->labelField => $value,
@@ -115,7 +116,7 @@ class FormSelect extends Component
                 }
 
                 // If the value is a simple value, we need to convert it to an array.
-                if (! is_iterable($value) && ! $value instanceof Model) {
+                if (!is_iterable($value) && !$value instanceof Model) {
                     return [
                         $this->valueField => $value,
                         $this->labelField => $value,

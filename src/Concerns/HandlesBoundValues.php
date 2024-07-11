@@ -68,7 +68,7 @@ trait HandlesBoundValues
     /**
      * Formats a DateTimeInterface if the key is specified as a date or datetime in the model.
      *
-     * @return void
+     * @return mixed
      */
     private function formatDateTime(Model $model, string $key, DateTimeInterface $date)
     {
@@ -109,7 +109,7 @@ trait HandlesBoundValues
      * Returns an array with the attached keys.
      *
      * @param  mixed  $bind
-     * @return void
+     * @return mixed
      */
     private function getAttachedKeysFromRelation($bind, string $name): ?array
     {
