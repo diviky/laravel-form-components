@@ -105,10 +105,16 @@ class FormSelect extends Component
 
     protected function normalizeOptions(array|Collection $options): Collection
     {
+        if (!is_array($options)) {
+            $options = $options->toArray();
+        }
+
+        $isList = Arr::isList($options);
+
         return collect($options)
-            ->map(function ($value, $key) {
+            ->map(function ($value, $key) use ($isList) {
                 // If the key is not numeric, we're going to assume this is the value.
-                if (!is_numeric($key)) {
+                if (!is_numeric($key) || !$isList) {
                     return [
                         $this->valueField => $key,
                         $this->labelField => $value,
