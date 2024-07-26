@@ -22,9 +22,9 @@ class FormSelect extends Component
 
     public string $label;
 
-    public array|Collection $options;
+    public array|Collection|null $options;
 
-    public $selectedKey;
+    public mixed $selectedKey;
 
     public bool $multiple;
 
@@ -103,8 +103,12 @@ class FormSelect extends Component
         return is_array($this->selectedKey) ? empty($this->selectedKey) : is_null($this->selectedKey);
     }
 
-    protected function normalizeOptions(array|Collection $options): Collection
+    protected function normalizeOptions(array|Collection|null $options): Collection
     {
+        if (is_null($options)) {
+            return collect([]);
+        }
+
         if (!is_array($options)) {
             $options = $options->toArray();
         }

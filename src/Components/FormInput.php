@@ -20,7 +20,7 @@ class FormInput extends Component
 
     public bool $floating;
 
-    public $value;
+    public mixed $value;
 
     /**
      * Create a new component instance.
@@ -31,9 +31,9 @@ class FormInput extends Component
         string $name,
         string $label = '',
         string $type = 'text',
-        $bind = null,
-        $default = null,
-        $language = null,
+        mixed $bind = null,
+        mixed $default = null,
+        ?string $language = null,
         bool $showErrors = true,
         bool $floating = false,
         string|HtmlString|array|Collection|null $extraAttributes = null,

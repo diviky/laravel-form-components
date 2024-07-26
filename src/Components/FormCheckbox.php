@@ -19,7 +19,7 @@ class FormCheckbox extends Component
 
     public string $label;
 
-    public $value;
+    public mixed $value;
 
     public bool $checked = false;
 
@@ -31,10 +31,11 @@ class FormCheckbox extends Component
     public function __construct(
         string $name,
         string $label = '',
-        $value = 1,
-        $bind = null,
+        mixed $value = 1,
+        mixed $bind = null,
         bool $default = false,
         bool $showErrors = true,
+        public ?string $copy = null,
         // Extra attributes
         HtmlString|array|string|Collection|null $extraAttributes = null,
     ) {
@@ -42,6 +43,7 @@ class FormCheckbox extends Component
         $this->label = $label;
         $this->value = $value;
         $this->showErrors = $showErrors;
+        $this->copy = $copy;
         $this->setExtraAttributes($extraAttributes);
 
         $inputName = static::convertBracketsToDots(Str::before($name, '[]'));

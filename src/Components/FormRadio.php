@@ -16,15 +16,15 @@ class FormRadio extends Component
 
     public string $label;
 
-    public $value;
+    public int|string $value;
 
     public bool $checked = false;
 
     public function __construct(
         string $name,
         string $label = '',
-        $value = 1,
-        $bind = null,
+        int|string $value = 1,
+        int|string|null $bind = null,
         bool $default = false,
         bool $showErrors = false,
         string|HtmlString|array|Collection|null $extraAttributes = null,

@@ -7,10 +7,19 @@
         <x-form-label :label="$label" :for="$attributes->get('id') ?: $id()" />
     @endif
 
+    @isset($prepend)
+        <div class="input-group-text">
+            {!! $prepend !!}
+        </div>
+    @endisset
+
     <select @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}" @endif
         name="{{ $name }}" @if ($multiple) multiple @endif
         @if ($placeholder) placeholder="{{ $placeholder }}" @endif {{ $extraAttributes ?? '' }}
-        @if ($label && !$attributes->get('id')) id="{{ $id() }}" @endif {!! $attributes->except(['extra-attributes'])->merge(['class' => 'form-select' . ($hasError($name) ? ' is-invalid' : '')]) !!}>
+        @if ($label && !$attributes->get('id')) id="{{ $id() }}" @endif {!! $attributes->except(['extra-attributes'])->merge(['class' => 'form-select' . ($hasError($name) ? ' is-invalid' : '')]) !!}
+        value-field="{{ $valueField }}" label-field="{{ $labelField }}">
+
+        {{ $before ?? '' }}
 
         @if ($placeholder)
             <option value="" disabled @if ($nothingSelected()) selected="selected" @endif>
@@ -37,8 +46,14 @@
             @endif
         @endforeach
 
-        {{ $append ?? '' }}
+        {{ $after ?? '' }}
     </select>
+
+    @isset($append)
+        <div class="input-group-text">
+            {!! $append !!}
+        </div>
+    @endisset
 
     @if ($floating)
         <x-form-label :label="$label" :for="$attributes->get('id') ?: $id()" />

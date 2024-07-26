@@ -16,7 +16,7 @@ class FormRange extends Component
 
     public string $label;
 
-    public $value;
+    public mixed $value;
 
     /**
      * Create a new component instance.
@@ -26,9 +26,9 @@ class FormRange extends Component
     public function __construct(
         string $name,
         string $label = '',
-        $bind = null,
-        $default = null,
-        $language = null,
+        mixed $bind = null,
+        mixed $default = null,
+        ?string $language = null,
         bool $showErrors = true,
         string|HtmlString|array|Collection|null $extraAttributes = null,
     ) {
