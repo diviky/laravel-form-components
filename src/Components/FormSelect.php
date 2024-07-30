@@ -40,9 +40,9 @@ class FormSelect extends Component
     public function __construct(
         string $name,
         string $label = '',
-        $options = [],
-        $bind = null,
-        $default = null,
+        array|Collection|null $options = [],
+        mixed $bind = null,
+        mixed $default = null,
         bool $multiple = false,
         bool $showErrors = true,
         bool $floating = false,
@@ -78,7 +78,7 @@ class FormSelect extends Component
         $this->floating = $floating && !$multiple;
 
         $this->valueField = $valueField ?? 'id';
-        $this->labelField = $labelField ?? 'name';
+        $this->labelField = $labelField ?? 'text';
         $this->disabledField = $disabledField ?? 'disabled';
         $this->childrenField = $childrenField ?? 'children';
 

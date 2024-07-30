@@ -9,7 +9,7 @@ use Illuminate\Support\ViewErrorBag;
 
 trait HandlesValidationErrors
 {
-    public $showErrors = true;
+    public bool $showErrors = true;
 
     /**
      * Returns a boolean wether the given attribute has an error

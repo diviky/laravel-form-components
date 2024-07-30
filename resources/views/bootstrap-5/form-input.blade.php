@@ -1,10 +1,10 @@
-<div class="@if ($type === 'hidden') d-none @elseif(!isset($prepend) && !isset($append)) form-group @endif">
+<div class="form-group @if ($type === 'hidden') d-none @endif">
     @if ($floating)
         <div class="form-floating">
     @endif
 
     @if (!$floating)
-        <x-form-label :label="$label" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$attributes->get('required')" :for="$attributes->get('id') ?: $id()" />
     @endif
 
     <div
@@ -38,7 +38,7 @@
         @endisset
 
         @if ($floating)
-            <x-form-label :label="$label" :for="$attributes->get('id') ?: $id()" />
+            <x-form-label :label="$label":required="$attributes->get('required')" :for="$attributes->get('id') ?: $id()" />
         @endif
 
         @if ($floating)
