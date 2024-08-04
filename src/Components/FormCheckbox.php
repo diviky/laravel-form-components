@@ -35,7 +35,7 @@ class FormCheckbox extends Component
         mixed $bind = null,
         bool $default = false,
         bool $showErrors = true,
-        public ?string $copy = null,
+        public ?string $copy = '0',
         // Extra attributes
         HtmlString|array|string|Collection|null $extraAttributes = null,
     ) {

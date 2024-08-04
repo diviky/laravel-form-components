@@ -1,13 +1,13 @@
-<form method="{{ $spoofMethod ? 'POST' : $method }}" {!! $attributes->merge(['class' => $hasError() ? 'needs-validation' : '']) !!}
+<form method="{{ $spoofMethod ? 'POST' : $method }}" {!! $attributes->class([
+    'needs-validation' => $hasError(),
+]) !!}
+    @if ($attributes->has('reset')) data-reset="true" @endif
+    @if ($attributes->has('render')) data-render="true" @endif
+    @if ($attributes->has('hide')) data-hide="true" @endif
     @if ($hasFiles) enctype="multipart/form-data" @endif
     @unless ($spellcheck)
         spellcheck="false"
     @endunless>
-    <style>
-        .inline-space> :not(template) {
-            margin-right: 1.25rem;
-        }
-    </style>
 
     @unless (in_array($method, ['HEAD', 'GET', 'OPTIONS']))
         @csrf

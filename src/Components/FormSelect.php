@@ -32,6 +32,8 @@ class FormSelect extends Component
 
     public string $placeholder;
 
+    public string $selectedKeys;
+
     /**
      * Create a new component instance.
      *
@@ -73,6 +75,8 @@ class FormSelect extends Component
             }
         }
 
+        $this->selectedKey = Arr::wrap($this->selectedKey);
+        $this->selectedKeys = implode(',', $this->selectedKey);
         $this->multiple = $multiple;
         $this->showErrors = $showErrors;
         $this->floating = $floating && !$multiple;

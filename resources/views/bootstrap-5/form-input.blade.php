@@ -4,15 +4,18 @@
     @endif
 
     @if (!$floating)
-        <x-form-label :label="$label" :required="$attributes->get('required')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$attributes->has('required')" :for="$attributes->get('id') ?: $id()" />
     @endif
 
-    <div
-        class="@if (isset($prepend) || isset($append)) input-group @endif @isset($icon) input-icon @endisset">
+    <div @class([
+        'input-group' => isset($prepend) || isset($append),
+        'input-icon' => @isset($icon),
+    ])>
+
         @isset($prepend)
-            <div class="input-group-text">
+            <x-form-input-group-text>
                 {!! $prepend !!}
-            </div>
+            </x-form-input-group-text>
         @endisset
 
         @isset($icon)
@@ -22,34 +25,36 @@
         @endisset
 
         <input {!! $attributes->except(['extra-attributes'])->merge([
-            'class' =>
-                'form-control' . ($type === 'color' ? ' form-control-color' : '') . ($hasError($name) ? ' is-invalid' : ''),
-        ]) !!} {{ $extraAttributes ?? '' }} type="{{ $type }}"
-            @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}"
-        @else
-            value="{{ $value ?? ($type === 'color' ? '#000000' : '') }}" @endif
-            name="{{ $name }}" @if ($label && !$attributes->get('id')) id="{{ $id() }}" @endif
-            @if ($floating && !$attributes->get('placeholder')) placeholder="&nbsp;" @endif />
+                'class' => 'form-control',
+                'type' => $type,
+                'name' => $name,
+                'id' => $id(),
+                'placeholder' => '&nbsp;',
+                'value' => $value ?? ($type === 'color' ? '#000000' : ''),
+            ])->class([
+                'form-control-color' => $type === 'color',
+                'is-invalid' => $hasError($name),
+            ]) !!} {{ $extraAttributes ?? '' }}
+            @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}" @endif />
 
         @isset($append)
-            <div class="input-group-text">
+            <x-form-input-group-text>
                 {!! $append !!}
-            </div>
+            </x-form-input-group-text>
         @endisset
-
-        @if ($floating)
-            <x-form-label :label="$label":required="$attributes->get('required')" :for="$attributes->get('id') ?: $id()" />
-        @endif
-
-        @if ($floating)
     </div>
+    @if ($floating)
+        <x-form-label :label="$label":required="$attributes->has('required')" :for="$attributes->get('id') ?: $id()" />
     @endif
 
-    {!! $help ?? null !!}
-
-    @if ($hasErrorAndShow($name))
-        <x-form-errors :name="$name" />
-    @endif
+    @if ($floating)
 </div>
+@endif
+
+<x-help> {!! $help ?? null !!} </x-help>
+
+@if ($hasErrorAndShow($name))
+    <x-form-errors :name="$name" />
+@endif
 
 </div>

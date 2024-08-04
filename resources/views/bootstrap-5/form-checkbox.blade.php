@@ -4,14 +4,21 @@
         <input type="hidden" value="{{ $copy }}" name="{{ $name }}" />
     @endisset
 
-    <input {!! $attributes->except(['extra-attributes'])->merge(['class' => 'form-check-input' . ($hasError($name) ? ' is-invalid' : '')]) !!} type="checkbox" value="{{ $value }}" {{ $extraAttributes ?? '' }}
+    <input {!! $attributes->except(['extra-attributes'])->class([
+            'is-invalid' => $hasError($name),
+        ])->merge([
+            'class' => 'form-check-input',
+            'id' => $id(),
+            'name' => $name,
+            'type' => 'checkbox',
+            'value' => $value,
+        ]) !!} {{ $extraAttributes ?? '' }}
         @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}" @endif
-        name="{{ $name }}" @if (!$attributes->get('id')) id="{{ $id() }}" @endif
-        @if ($checked) checked="checked" @endif value="{{ $value }}" />
+        @checked($checked) />
 
-    <x-form-label :label="$label" :required="$attributes->get('required')" :for="$attributes->get('id') ?: $id()" class="form-check-label" />
+    <x-form-label :label="$label" :required="$attributes->has('required')" :for="$attributes->get('id') ?: $id()" class="form-check-label" />
 
-    {!! $help ?? null !!}
+    <x-help> {!! $help ?? null !!} </x-help>
 
     @if ($hasErrorAndShow($name))
         <x-form-errors :name="$name" />

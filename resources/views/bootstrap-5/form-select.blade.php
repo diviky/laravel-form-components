@@ -4,66 +4,79 @@
     @endif
 
     @if (!$floating)
-        <x-form-label :label="$label" :required="$attributes->get('required')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$attributes->has('required')" :for="$attributes->get('id') ?: $id()" />
     @endif
 
-    @isset($prepend)
-        <div class="input-group-text">
-            {!! $prepend !!}
-        </div>
-    @endisset
+    <div @class([
+        'input-group' => isset($prepend) || isset($append),
+        'input-icon' => @isset($icon),
+    ])>
 
-    <select @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}" @endif
-        name="{{ $name }}" @if ($multiple) multiple @endif
-        @if ($placeholder) placeholder="{{ $placeholder }}" @endif {{ $extraAttributes ?? '' }}
-        @if ($label && !$attributes->get('id')) id="{{ $id() }}" @endif {!! $attributes->except(['extra-attributes'])->merge(['class' => 'form-select' . ($hasError($name) ? ' is-invalid' : '')]) !!}
-        value-field="{{ $valueField }}" label-field="{{ $labelField }}">
+        @isset($prepend)
+            <x-form-input-group-text>
+                {!! $prepend !!}
+            </x-form-input-group-text>
+        @endisset
 
-        {{ $before ?? '' }}
+        <select @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}" @endif
+            @if ($multiple) multiple @endif {{ $extraAttributes ?? '' }} {!! $attributes->except(['extra-attributes'])->merge([
+                    'class' => 'form-select',
+                    'id' => $id(),
+                    'placeholder' => $placeholder,
+                    'value-field' => $valueField,
+                    'label-field' => $labelField,
+                    'name' => $name,
+                    'data-selected' => $selectedKeys,
+                ])->class([
+                    'is-invalid' => $hasError($name),
+                ]) !!}>
 
-        @if ($placeholder)
-            <option value="" disabled @if ($nothingSelected()) selected="selected" @endif>
-                {{ $placeholder }}
-            </option>
-        @endif
+            {{ $before ?? '' }}
 
-        {!! $slot !!}
-
-        @foreach ($options as $key => $option)
-            @if ($optionIsOptGroup($option))
-                <optgroup label="{{ $optionLabel($option) }}">
-                    @foreach ($optionChildren($option) as $child)
-                        <option value="{{ $optionValue($child) }}" @selected($isSelected($optionValue($child)))
-                            @disabled($optionIsDisabled($child))>
-                            {{ $optionLabel($child) }}
-                        </option>
-                    @endforeach
-                </optgroup>
-            @else
-                <option value="{{ $optionValue($option) }}" @selected($isSelected($optionValue($option))) @disabled($optionIsDisabled($option))>
-                    {{ $optionLabel($option) }}
+            @if ($placeholder)
+                <option value="" @if ($nothingSelected()) selected="selected" @endif>
+                    {{ $placeholder }}
                 </option>
             @endif
-        @endforeach
 
-        {{ $after ?? '' }}
-    </select>
+            {!! $slot !!}
 
-    @isset($append)
-        <div class="input-group-text">
-            {!! $append !!}
-        </div>
-    @endisset
+            @foreach ($options as $key => $option)
+                @if ($optionIsOptGroup($option))
+                    <optgroup label="{{ $optionLabel($option) }}">
+                        @foreach ($optionChildren($option) as $child)
+                            <option value="{{ $optionValue($child) }}" @selected($isSelected($optionValue($child)))
+                                @disabled($optionIsDisabled($child))>
+                                {{ $optionLabel($child) }}
+                            </option>
+                        @endforeach
+                    </optgroup>
+                @else
+                    <option value="{{ $optionValue($option) }}" @selected($isSelected($optionValue($option)))
+                        @disabled($optionIsDisabled($option))>
+                        {{ $optionLabel($option) }}
+                    </option>
+                @endif
+            @endforeach
 
+            {{ $after ?? '' }}
+        </select>
+
+        @isset($append)
+            <x-form-input-group-text>
+                {!! $append !!}
+            </x-form-input-group-text>
+        @endisset
+    </div>
     @if ($floating)
-        <x-form-label :label="$label" :required="$attributes->get('required')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$attributes->has('required')" :for="$attributes->get('id') ?: $id()" />
     @endif
 
     @if ($floating)
 </div>
 @endif
 
-{!! $help ?? null !!}
+<x-help> {!! $help ?? null !!} </x-help>
 
 @if ($hasErrorAndShow($name))
     <x-form-errors :name="$name" />

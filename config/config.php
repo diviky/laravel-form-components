@@ -83,5 +83,9 @@ return [
             'view' => 'form-components::{framework}.form-select',
             'class' => Components\TimezoneSelect::class,
         ],
+
+        'help' => [
+            'view' => 'form-components::{framework}.help',
+        ],
     ],
 ];

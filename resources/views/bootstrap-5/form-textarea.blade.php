@@ -4,7 +4,7 @@
     @endif
 
     @if (!$floating)
-        <x-form-label :label="$label" :required="$attributes->get('required')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$attributes->has('required')" :for="$attributes->get('id') ?: $id()" />
     @endif
 
     <textarea @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}" @endif
@@ -17,14 +17,14 @@
 </textarea>
 
     @if ($floating)
-        <x-form-label :label="$label" :required="$attributes->get('required')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$attributes->has('required')" :for="$attributes->get('id') ?: $id()" />
     @endif
 
     @if ($floating)
 </div>
 @endif
 
-{!! $help ?? null !!}
+<x-help> {!! $help ?? null !!} </x-help>
 
 @if ($hasErrorAndShow($name))
     <x-form-errors :name="$name" />
