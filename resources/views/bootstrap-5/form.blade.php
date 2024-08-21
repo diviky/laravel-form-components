@@ -1,5 +1,6 @@
 <form method="{{ $spoofMethod ? 'POST' : $method }}" {!! $attributes->class([
     'needs-validation' => $hasError(),
+    'form-floated' => $attributes->has('floated'),
 ]) !!}
     @if ($attributes->has('reset')) data-reset="true" @endif
     @if ($attributes->has('render')) data-render="true" @endif

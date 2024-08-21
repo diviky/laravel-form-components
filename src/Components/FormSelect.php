@@ -81,8 +81,8 @@ class FormSelect extends Component
         $this->showErrors = $showErrors;
         $this->floating = $floating && !$multiple;
 
-        $this->valueField = $valueField ?? 'id';
-        $this->labelField = $labelField ?? 'text';
+        $this->valueField = $valueField ?? ((is_array($extraAttributes) && isset($extraAttributes['value-field'])) ? $extraAttributes['value-field'] : 'id');
+        $this->labelField = $labelField ?? ((is_array($extraAttributes) && isset($extraAttributes['label-field'])) ? $extraAttributes['label-field'] : 'text');
         $this->disabledField = $disabledField ?? 'disabled';
         $this->childrenField = $childrenField ?? 'children';
 

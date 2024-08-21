@@ -72,7 +72,7 @@ abstract class Component extends BaseComponent
         }
 
         if (isset($this->name)) {
-            return $this->id = $this->generateIdByName();
+            return $this->id = $this->generateIdByName() . '_' . Str::random(4);
         }
 
         return $this->id = Str::random(4);
@@ -83,7 +83,7 @@ abstract class Component extends BaseComponent
      */
     protected function generateIdByName(): string
     {
-        return 'auto_id_' . $this->name;
+        return 'auto_id_' . trim(str_replace(['[', ']'], ['_', ''], $this->name), '_');
     }
 
     /**

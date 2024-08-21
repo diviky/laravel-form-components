@@ -35,7 +35,7 @@ class FormCheckbox extends Component
         mixed $bind = null,
         bool $default = false,
         bool $showErrors = true,
-        public ?string $copy = '0',
+        public mixed $copy = '0',
         // Extra attributes
         HtmlString|array|string|Collection|null $extraAttributes = null,
     ) {
@@ -44,6 +44,7 @@ class FormCheckbox extends Component
         $this->value = $value;
         $this->showErrors = $showErrors;
         $this->copy = $copy;
+
         $this->setExtraAttributes($extraAttributes);
 
         $inputName = static::convertBracketsToDots(Str::before($name, '[]'));

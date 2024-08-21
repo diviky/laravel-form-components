@@ -20,8 +20,8 @@ class TimezoneSelect extends FormSelect
         bool $showErrors = true,
         bool $floating = false,
         string $placeholder = '',
-        public ?string $valueField = null,
-        public ?string $labelField = null,
+        public ?string $valueField = 'id',
+        public ?string $labelField = 'name',
         public ?string $disabledField = null,
         public ?string $childrenField = null,
 

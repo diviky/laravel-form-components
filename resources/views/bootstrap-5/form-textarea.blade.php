@@ -4,20 +4,22 @@
     @endif
 
     @if (!$floating)
-        <x-form-label :label="$label" :required="$attributes->has('required')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
     @endif
 
-    <textarea @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}" @endif
-        name="{{ $name }}" {{ $extraAttributes ?? '' }}
-        @if ($label && !$attributes->get('id')) id="{{ $id() }}" @endif {{--  Placeholder is required as of writing  --}}
-        @if ($floating && !$attributes->get('placeholder')) placeholder="&nbsp;" @endif {!! $attributes->except(['extra-attributes'])->merge(['class' => 'form-control' . ($hasError($name) ? ' is-invalid' : '')]) !!}>
-@unless ($isWired())
-{!! $value !!}
-@endunless
-</textarea>
+    <textarea {!! $attributes->except(['extra-attributes'])->merge([
+            'class' => 'form-control',
+            'name' => $name,
+            'id' => $id(),
+            'placeholder' => '&nbsp;',
+        ])->class([
+            'is-invalid' => $hasError($name),
+        ]) !!}
+        @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}" @endif
+        {{ $extraAttributes ?? '' }}>{!! $value !!}</textarea>
 
     @if ($floating)
-        <x-form-label :label="$label" :required="$attributes->has('required')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
     @endif
 
     @if ($floating)

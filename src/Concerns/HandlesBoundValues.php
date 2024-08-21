@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use stdClass;
 
 trait HandlesBoundValues
 {
@@ -54,6 +56,18 @@ trait HandlesBoundValues
 
         if ($this->manyRelation) {
             return $this->getAttachedKeysFromRelation($bind, $name);
+        }
+
+        if ($bind instanceof Collection) {
+            $bind = $bind->toArray();
+        }
+
+        if ($bind instanceof stdClass && method_exists($bind, 'toArray')) {
+            $bind = $bind->toArray();
+        }
+
+        if ($bind instanceof stdClass) {
+            $bind = json_decode(json_encode($bind), true);
         }
 
         $boundValue = data_get($bind, $name);

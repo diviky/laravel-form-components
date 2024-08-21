@@ -4,7 +4,7 @@
     @endif
 
     @if (!$floating)
-        <x-form-label :label="$label" :required="$attributes->has('required')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
     @endif
 
     <div @class([
@@ -69,7 +69,7 @@
         @endisset
     </div>
     @if ($floating)
-        <x-form-label :label="$label" :required="$attributes->has('required')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
     @endif
 
     @if ($floating)

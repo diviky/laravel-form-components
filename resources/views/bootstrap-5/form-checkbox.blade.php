@@ -1,8 +1,11 @@
 <div class="form-check @if (null !== $attributes->get('inline')) form-check-inline @endif">
+    @if ($attributes->has('title'))
+        <div class="mb-2 text-bold">{{ $attributes->get('title') }}</div>
+    @endif
 
-    @isset($copy)
+    @if ($copy !== false)
         <input type="hidden" value="{{ $copy }}" name="{{ $name }}" />
-    @endisset
+    @endif
 
     <input {!! $attributes->except(['extra-attributes'])->class([
             'is-invalid' => $hasError($name),
@@ -16,11 +19,13 @@
         @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}" @endif
         @checked($checked) />
 
-    <x-form-label :label="$label" :required="$attributes->has('required')" :for="$attributes->get('id') ?: $id()" class="form-check-label" />
+    <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" class="form-check-label" />
 
-    <x-help> {!! $help ?? null !!} </x-help>
-
-    @if ($hasErrorAndShow($name))
-        <x-form-errors :name="$name" />
-    @endif
+    <span class="form-check-description">
+        <x-help> {!! $help ?? null !!} </x-help>
+    </span>
 </div>
+
+@if ($hasErrorAndShow($name))
+    <x-form-errors :name="$name" />
+@endif
