@@ -87,5 +87,10 @@ return [
         'help' => [
             'view' => 'form-components::{framework}.help',
         ],
+
+        'icon' => [
+            'view' => 'laravel-components::{framework}.icon',
+            'class' => Components\Icon::class,
+        ],
     ],
 ];
