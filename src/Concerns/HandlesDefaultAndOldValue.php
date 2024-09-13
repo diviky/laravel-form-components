@@ -23,7 +23,9 @@ trait HandlesDefaultAndOldValue
 
             $default = is_null($boundValue) ? $default : $boundValue;
 
-            return $this->value = old($inputName, $default);
+            $this->value = old($inputName, $default);
+
+            return;
         }
 
         if ($bind !== false) {
