@@ -8,14 +8,14 @@ use Diviky\LaravelFormComponents\Support\Timezone;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 
-class TimezoneSelect extends FormSelect
+class FormTimezones extends FormSelect
 {
     public function __construct(
         string $name,
         string $label = '',
-        $options = [],
-        $bind = null,
-        $default = null,
+        mixed $options = [],
+        mixed $bind = null,
+        mixed $default = null,
         bool $multiple = false,
         bool $showErrors = true,
         bool $floating = false,
@@ -29,7 +29,7 @@ class TimezoneSelect extends FormSelect
         HtmlString|array|string|Collection|null $extraAttributes = null,
 
         // Timezone specific
-        array|string|bool|null $only = null,
+        public array|string|bool|null $only = null,
     ) {
         parent::__construct(
             name: $name,
@@ -49,6 +49,6 @@ class TimezoneSelect extends FormSelect
         );
 
         $this->only = $only ?? false;
-        $this->options = (new Timezone())->only($this->only)->allMapped();
+        $this->options = (new Timezone)->only($this->only)->allMapped();
     }
 }

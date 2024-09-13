@@ -1,10 +1,10 @@
 <form method="{{ $spoofMethod ? 'POST' : $method }}" {!! $attributes->class([
     'needs-validation' => $hasError(),
-    'form-floated' => $attributes->has('floated'),
+    'form-floated' => $style == 'floated' || $attributes->has('floated'),
 ]) !!}
     @if ($attributes->has('reset')) data-reset="true" @endif
     @if ($attributes->has('render')) data-render="true" @endif
-    @if ($attributes->has('hide')) data-hide="true" @endif
+    @if ($attributes->has('hide')) data-hide="true" @endif @if ($attributes->has('easy')) easysubmit @endif
     @if ($hasFiles) enctype="multipart/form-data" @endif
     @unless ($spellcheck)
         spellcheck="false"

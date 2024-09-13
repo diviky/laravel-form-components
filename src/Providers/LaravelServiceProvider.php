@@ -46,6 +46,7 @@ class LaravelServiceProvider extends BaseServiceProvider
 
         Collection::make(config('form-components.components'))->each(
             function (array $component, string $alias) use ($prefix, $framework): void {
+                $alias = $component['alias'] ?? $alias;
                 if (isset($component['class'])) {
                     Blade::component($alias, $component['class'], $prefix);
                 } else {

@@ -2,6 +2,4 @@
 
 namespace Diviky\LaravelFormComponents\Components;
 
-class FormSubmit extends Component
-{
-}
+class FormSubmit extends Component {}

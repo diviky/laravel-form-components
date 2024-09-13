@@ -16,7 +16,7 @@ abstract class Component extends BaseComponent
      *
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * {@inheritDoc}

@@ -28,12 +28,12 @@ class FormInput extends Component
      * @return void
      */
     public function __construct(
-        string $name,
+        string $name = '',
         string $label = '',
         string $type = 'text',
         mixed $bind = null,
         mixed $default = null,
-        ?string $language = null,
+        public ?string $language = null,
         bool $showErrors = true,
         bool $floating = false,
         string|HtmlString|array|Collection|null $extraAttributes = null,
@@ -45,7 +45,7 @@ class FormInput extends Component
         $this->floating = $floating && $type !== 'hidden';
         $this->setExtraAttributes($extraAttributes);
 
-        if ($language) {
+        if (!is_null($language)) {
             $this->name = "{$name}[{$language}]";
         }
 

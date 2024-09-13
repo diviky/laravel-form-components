@@ -2,6 +2,4 @@
 
 namespace Diviky\LaravelFormComponents\Components;
 
-class FormTextarea extends FormInput
-{
-}
+class FormTextarea extends FormInput {}

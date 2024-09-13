@@ -41,7 +41,7 @@
 
             {!! $slot !!}
 
-            @foreach ($options as $key => $option)
+            @foreach ($options as $option)
                 @if ($optionIsOptGroup($option))
                     <optgroup label="{{ $optionLabel($option) }}">
                         @foreach ($optionChildren($option) as $child)

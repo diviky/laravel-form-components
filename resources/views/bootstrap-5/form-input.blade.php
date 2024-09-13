@@ -29,7 +29,7 @@
                 'type' => $type,
                 'name' => $name,
                 'id' => $id(),
-                'placeholder' => '&nbsp;',
+                'placeholder' => null,
                 'value' => $value,
             ])->class([
                 'form-control-color' => $type === 'color',
@@ -44,7 +44,7 @@
         @endisset
     </div>
     @if ($floating)
-        <x-form-label :label="$label":required="$attributes->has('required')" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
     @endif
 
     @if ($floating)

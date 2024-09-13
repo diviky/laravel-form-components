@@ -37,9 +37,7 @@ class PostMorphToMany extends Model
     }
 }
 
-class Comment extends Model
-{
-}
+class Comment extends Model {}
 
 class SelectRelationTest extends TestCase
 {

@@ -40,7 +40,7 @@ class FormSelect extends Component
      * @return void
      */
     public function __construct(
-        string $name,
+        string $name = '',
         string $label = '',
         array|Collection|null $options = [],
         mixed $bind = null,

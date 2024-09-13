@@ -14,6 +14,8 @@ class Form extends Component
      */
     public string $method;
 
+    public ?string $style;
+
     /**
      * Form method spoofing to support PUT, PATCH and DELETE actions.
      * https://laravel.com/docs/master/routing#form-method-spoofing
@@ -26,7 +28,8 @@ class Form extends Component
      * @return void
      */
     public function __construct(
-        string $method = 'POST',
+        string $method,
+        ?string $style = null,
         public bool $hasFiles = false,
         public bool $spellcheck = false,
         HtmlString|array|string|Collection|null $extraAttributes = null,
@@ -35,6 +38,7 @@ class Form extends Component
         $this->setExtraAttributes($extraAttributes);
 
         $this->spoofMethod = in_array($this->method, ['PUT', 'PATCH', 'DELETE']);
+        $this->style = !is_null($style) ? $style : config('form-components.form_style');
     }
 
     /**

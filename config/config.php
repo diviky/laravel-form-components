@@ -13,6 +13,11 @@ return [
     /** bool | string */
     'default_wire' => false,
 
+    /**
+     * How the form filed should display
+     */
+    'form_style' => null,
+
     'components' => [
         'form' => [
             'view' => 'form-components::{framework}.form',
@@ -79,9 +84,9 @@ return [
             'class' => Components\FormTextarea::class,
         ],
 
-        'timezone-select' => [
+        'form-timezones' => [
             'view' => 'form-components::{framework}.form-select',
-            'class' => Components\TimezoneSelect::class,
+            'class' => Components\FormTimezones::class,
         ],
 
         'help' => [
@@ -89,7 +94,7 @@ return [
         ],
 
         'icon' => [
-            'view' => 'laravel-components::{framework}.icon',
+            'view' => 'form-components::{framework}.icon',
             'class' => Components\Icon::class,
         ],
     ],

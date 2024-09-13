@@ -22,7 +22,7 @@ trait HasExtraAttributes
             : $this->getExtraAttributesFromString($attributes);
     }
 
-    private function getExtraAttributesFromIterable(array|Collection $attributes): HtmlString
+    protected function getExtraAttributesFromIterable(array|Collection $attributes): HtmlString
     {
         $attributes = collect($attributes)
             ->filter()
@@ -32,7 +32,7 @@ trait HasExtraAttributes
         return new HtmlString($attributes);
     }
 
-    private function getExtraAttributesFromString(string|HtmlString $attributes): HtmlString
+    protected function getExtraAttributesFromString(string|HtmlString $attributes): HtmlString
     {
         return $attributes instanceof HtmlString ? $attributes : new HtmlString($attributes);
     }

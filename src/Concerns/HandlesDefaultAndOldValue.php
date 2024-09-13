@@ -6,12 +6,12 @@ trait HandlesDefaultAndOldValue
 {
     use HandlesBoundValues;
 
-    private function setValue(
+    protected function setValue(
         string $name,
-        $bind = null,
-        $default = null,
-        $language = null
-    ) {
+        mixed $bind = null,
+        mixed $default = null,
+        ?string $language = null
+    ): void {
         if ($this->isWired()) {
             return;
         }

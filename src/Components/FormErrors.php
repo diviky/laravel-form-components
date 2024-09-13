@@ -16,7 +16,7 @@ class FormErrors extends Component
      * @return void
      */
     public function __construct(
-        string $name,
+        string $name = '',
         string $bag = 'default',
         public ?string $tag = null,
         public ?string $inputId = null,

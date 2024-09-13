@@ -9,17 +9,17 @@ class FormDataBinder
     /**
      * Tree of bound targets.
      */
-    private array $bindings = [];
+    protected array $bindings = [];
 
     /**
      * Wired to a Livewire component.
      */
-    private $wire = false;
+    protected $wire = false;
 
     /**
      * Whether the default wire has been verified once.
      */
-    private $loadDefaultWire = true;
+    protected $loadDefaultWire = true;
 
     /**
      * Bind a target to the current instance

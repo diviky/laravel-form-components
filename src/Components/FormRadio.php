@@ -21,7 +21,7 @@ class FormRadio extends Component
     public bool $checked = false;
 
     public function __construct(
-        string $name,
+        string $name = '',
         string $label = '',
         int|string $value = 1,
         int|string|null $bind = null,

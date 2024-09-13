@@ -29,7 +29,7 @@ class FormCheckbox extends Component
      * @return void
      */
     public function __construct(
-        string $name,
+        string $name = '',
         string $label = '',
         mixed $value = 1,
         mixed $bind = null,

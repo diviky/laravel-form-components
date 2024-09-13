@@ -15,12 +15,12 @@ use Illuminate\Support\Collection;
  */
 trait GetsSelectOptionProperties
 {
-    public function optionChildren($option, ?string $childrenField = null)
+    public function optionChildren(mixed $option, ?string $childrenField = null): mixed
     {
         return $this->optionProperty($option, $childrenField ?? $this->childrenField, []);
     }
 
-    public function optionLabel($option, ?string $labelField = null, ?string $valueField = null)
+    public function optionLabel(mixed $option, ?string $labelField = null, ?string $valueField = null): mixed
     {
         return $this->optionProperty(
             $option,
@@ -29,7 +29,7 @@ trait GetsSelectOptionProperties
         );
     }
 
-    public function optionSelectedLabel($option, ?string $selectedLabelField = null, ?string $labelField = null, ?string $valueField = null)
+    public function optionSelectedLabel(mixed $option, ?string $selectedLabelField = null, ?string $labelField = null, ?string $valueField = null): mixed
     {
         return $this->optionProperty(
             $option,
@@ -38,19 +38,19 @@ trait GetsSelectOptionProperties
         );
     }
 
-    public function optionValue($option, ?string $valueField = null)
+    public function optionValue(mixed $option, ?string $valueField = null): mixed
     {
         return $this->optionProperty($option, $valueField ?? $this->valueField);
     }
 
-    public function optionIsDisabled($option, ?string $disabledField = null): bool
+    public function optionIsDisabled(mixed $option, ?string $disabledField = null): bool
     {
         $disabled = $this->optionProperty($option, $disabledField ?? $this->disabledField, false);
 
         return is_bool($disabled) ? $disabled : false;
     }
 
-    public function optionIsOptGroup($option, ?string $childrenField = null): bool
+    public function optionIsOptGroup(mixed $option, ?string $childrenField = null): bool
     {
         // We will consider an option an "opt group" if it has children.
         $children = $this->optionChildren($option, $childrenField);
@@ -60,7 +60,7 @@ trait GetsSelectOptionProperties
             : !empty($children);
     }
 
-    protected function optionProperty($option, $field, $default = null)
+    protected function optionProperty(mixed $option, string $field, mixed $default = null): mixed
     {
         if (is_array($option)) {
             return Arr::get($option, $field, $default);
