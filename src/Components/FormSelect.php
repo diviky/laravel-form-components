@@ -53,6 +53,7 @@ class FormSelect extends Component
         public ?string $labelField = null,
         public ?string $disabledField = null,
         public ?string $childrenField = null,
+        public ?array $settings = [],
         string|HtmlString|array|Collection|null $extraAttributes = null,
     ) {
         $this->name = $name;

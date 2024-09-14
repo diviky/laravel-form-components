@@ -37,6 +37,7 @@ class FormCheckbox extends Component
         bool $showErrors = true,
         public mixed $copy = '0',
         // Extra attributes
+        public ?array $settings = [],
         HtmlString|array|string|Collection|null $extraAttributes = null,
     ) {
         $this->name = $name;

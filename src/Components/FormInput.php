@@ -37,6 +37,7 @@ class FormInput extends Component
         bool $showErrors = true,
         bool $floating = false,
         string|HtmlString|array|Collection|null $extraAttributes = null,
+        public ?array $settings = []
     ) {
         $this->name = $name;
         $this->label = $label;

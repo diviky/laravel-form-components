@@ -26,6 +26,7 @@ class FormTimezones extends FormSelect
         public ?string $childrenField = null,
 
         // Extra Attributes
+        public ?array $settings = [],
         HtmlString|array|string|Collection|null $extraAttributes = null,
 
         // Timezone specific

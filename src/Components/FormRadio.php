@@ -27,6 +27,7 @@ class FormRadio extends Component
         int|string|null $bind = null,
         bool $default = false,
         bool $showErrors = false,
+        public ?array $settings = [],
         string|HtmlString|array|Collection|null $extraAttributes = null,
     ) {
         $this->name = $name;
