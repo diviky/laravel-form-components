@@ -88,6 +88,8 @@ class FormSelect extends Component
         $this->childrenField = $childrenField ?? 'children';
 
         $this->options = $this->normalizeOptions($options);
+
+        //dd($this->options);
     }
 
     public function isSelected($key): bool

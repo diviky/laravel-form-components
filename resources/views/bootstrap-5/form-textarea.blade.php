@@ -11,7 +11,7 @@
             'class' => 'form-control',
             'name' => $name,
             'id' => $id(),
-            'placeholder' => '&nbsp;',
+            'placeholder' => '',
         ])->class([
             'is-invalid' => $hasError($name),
         ]) !!}

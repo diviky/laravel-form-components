@@ -10,10 +10,11 @@
     <div @class([
         'input-group' => isset($prepend) || isset($append),
         'input-icon' => @isset($icon),
+        'input-group-flat' => $attributes->has('flat'),
     ])>
 
         @isset($prepend)
-            <x-form-input-group-text>
+            <x-form-input-group-text :attributes="$prepend->attributes">
                 {!! $prepend !!}
             </x-form-input-group-text>
         @endisset
@@ -38,7 +39,7 @@
             @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}" @endif />
 
         @isset($append)
-            <x-form-input-group-text>
+            <x-form-input-group-text :attributes="$append->attributes">
                 {!! $append !!}
             </x-form-input-group-text>
         @endisset
@@ -52,9 +53,6 @@
 @endif
 
 <x-help> {!! $help ?? null !!} </x-help>
-
-@if ($hasErrorAndShow($name))
-    <x-form-errors :name="$name" />
-@endif
+<x-form-errors :name="$name" />
 
 </div>

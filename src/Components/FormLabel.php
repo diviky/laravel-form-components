@@ -6,6 +6,8 @@ class FormLabel extends Component
 {
     public string $label;
 
+    public string $hint;
+
     public mixed $required;
 
     /**
@@ -13,9 +15,13 @@ class FormLabel extends Component
      *
      * @return void
      */
-    public function __construct(string $label = '', mixed $required = false)
-    {
+    public function __construct(
+        string $label = '',
+        string $hint = '',
+        mixed $required = null
+    ) {
         $this->label = $label;
         $this->required = $required;
+        $this->hint = $hint;
     }
 }

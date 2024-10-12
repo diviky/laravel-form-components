@@ -44,12 +44,12 @@ class FormInput extends Component
         $this->type = $type;
         $this->showErrors = $showErrors;
         $this->floating = $floating && $type !== 'hidden';
-        $this->setExtraAttributes($extraAttributes);
 
         if (!is_null($language)) {
             $this->name = "{$name}[{$language}]";
         }
 
         $this->setValue($name, $bind, $default, $language);
+        $this->setExtraAttributes($extraAttributes);
     }
 }

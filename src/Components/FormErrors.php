@@ -2,10 +2,13 @@
 
 namespace Diviky\LaravelFormComponents\Components;
 
+use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
 use Illuminate\Support\Str;
 
 class FormErrors extends Component
 {
+    use HandlesValidationErrors;
+
     public string $name;
 
     public string $bag;

@@ -17,6 +17,10 @@ trait HasExtraAttributes
             return;
         }
 
+        if (is_iterable($attributes)) {
+            $this->withAttributes(collect($attributes)->filter()->toArray());
+        }
+
         $this->extraAttributes = is_iterable($attributes)
             ? $this->getExtraAttributesFromIterable($attributes)
             : $this->getExtraAttributesFromString($attributes);

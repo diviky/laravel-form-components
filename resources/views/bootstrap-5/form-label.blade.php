@@ -4,9 +4,16 @@
             @if ($attributes->has('title')) class="text-underline" data-toggle="tooltip" title="{{ $attributes->get('title') }}" @endif>
             {{ $label }}
 
+
             @if ($required)
                 <span class="text-warning">*</span>
             @endif
         </span>
+
+        @if ($hint)
+            <span class="cursor-help" data-toggle="tooltip" title="{{ $attributes->get('title') }}">
+                <x-icon name="help" />
+            </span>
+        @endif
     </label>
 @endif
