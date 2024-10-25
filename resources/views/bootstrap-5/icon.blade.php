@@ -8,6 +8,7 @@
     <i {{ $attributes->merge(['class' => $icon()])->class([
         'ti-md' => $size == 'md',
         'ti-lg' => $size == 'lg',
+        'ti-sm' => $size == 'sm',
     ]) }}
         @if ($attributes->has('title')) title="{{ $attributes->get('title') }}" data-toggle="tooltip" @endif></i>
     @if (!empty($action))

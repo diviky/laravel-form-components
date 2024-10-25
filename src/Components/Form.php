@@ -41,16 +41,4 @@ class Form extends Component
         $this->spoofMethod = in_array($this->method, ['PUT', 'PATCH', 'DELETE']);
         $this->style = !is_null($style) ? $style : config('form-components.form_style');
     }
-
-    /**
-     * Returns a boolean wether the error bag is not empty.
-     *
-     * @param  string  $bag
-     */
-    public function hasError($bag = 'default'): bool
-    {
-        $errors = View::shared('errors', fn () => request()->session()->get('errors', new ViewErrorBag));
-
-        return $errors->getBag($bag)->isNotEmpty();
-    }
 }

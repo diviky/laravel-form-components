@@ -6,10 +6,17 @@ use Diviky\LaravelFormComponents\Concerns\HasExtraAttributes;
 use Diviky\LaravelFormComponents\FormDataBinder;
 use Illuminate\Support\Str;
 use Illuminate\View\Component as BaseComponent;
+use Diviky\LaravelFormComponents\Concerns\HandlesDefaultAndOldValue;
+use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
+use Diviky\LaravelFormComponents\Concerns\HandlesBoundValues;
 
 abstract class Component extends BaseComponent
 {
     use HasExtraAttributes;
+
+    use HandlesDefaultAndOldValue;
+    use HandlesValidationErrors;
+    use HandlesBoundValues;
 
     /**
      * ID for this component.
@@ -94,5 +101,20 @@ abstract class Component extends BaseComponent
     protected static function convertBracketsToDots($name): string
     {
         return str_replace(['[', ']'], ['.', ''], $name);
+    }
+
+    public function isReadonly(): bool
+    {
+        return $this->attributes->has('readonly') && $this->attributes->get('readonly') == true;
+    }
+
+    public function isRequired(): bool
+    {
+        return $this->attributes->has('required') && $this->attributes->get('required') == true;
+    }
+
+    public function isDisabled(): bool
+    {
+        return $this->attributes->has('disabled') && $this->attributes->get('disabled') == true;
     }
 }
