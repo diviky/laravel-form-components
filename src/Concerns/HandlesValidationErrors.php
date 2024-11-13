@@ -44,7 +44,6 @@ trait HandlesValidationErrors
         return $errorBag->has($name) || $errorBag->has($name . '.*');
     }
 
-
     /**
      * Returns a boolean wether the error bag is not empty.
      *

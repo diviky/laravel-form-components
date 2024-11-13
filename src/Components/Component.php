@@ -2,21 +2,20 @@
 
 namespace Diviky\LaravelFormComponents\Components;
 
+use Diviky\LaravelFormComponents\Concerns\HandlesBoundValues;
+use Diviky\LaravelFormComponents\Concerns\HandlesDefaultAndOldValue;
+use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
 use Diviky\LaravelFormComponents\Concerns\HasExtraAttributes;
 use Diviky\LaravelFormComponents\FormDataBinder;
 use Illuminate\Support\Str;
 use Illuminate\View\Component as BaseComponent;
-use Diviky\LaravelFormComponents\Concerns\HandlesDefaultAndOldValue;
-use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
-use Diviky\LaravelFormComponents\Concerns\HandlesBoundValues;
 
 abstract class Component extends BaseComponent
 {
-    use HasExtraAttributes;
-
+    use HandlesBoundValues;
     use HandlesDefaultAndOldValue;
     use HandlesValidationErrors;
-    use HandlesBoundValues;
+    use HasExtraAttributes;
 
     /**
      * ID for this component.
@@ -85,6 +84,24 @@ abstract class Component extends BaseComponent
         return $this->id = Str::random(4);
     }
 
+    public function entangle($attributes)
+    {
+        if (isset($attributes) && count($attributes->whereStartsWith('wire:model')->getIterator())) {
+            return '$wire.entangle(\'' . $attributes->wire('model') . "')";
+        }
+
+        return json_encode($this->getValue());
+    }
+
+    public function wire()
+    {
+        if ($this->isWired()) {
+            return 'wire:model' . $this->wireModifier() . '=' . $this->name;
+        }
+
+        return '';
+    }
+
     /**
      * Generates an ID by the name attribute.
      */
@@ -100,7 +117,7 @@ abstract class Component extends BaseComponent
      */
     protected static function convertBracketsToDots($name): string
     {
-        return str_replace(['[', ']'], ['.', ''], $name);
+        return str_replace(['[', ']'], ['.', ''], Str::before($name, '[]'));
     }
 
     public function isReadonly(): bool

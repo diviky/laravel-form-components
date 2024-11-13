@@ -3,20 +3,15 @@
 namespace Diviky\LaravelFormComponents\Components;
 
 use Diviky\LaravelFormComponents\Concerns\GetsSelectOptionProperties;
-use Diviky\LaravelFormComponents\Concerns\HandlesBoundValues;
-use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
-use Illuminate\Support\Str;
 
 class FormSelect extends Component
 {
     use GetsSelectOptionProperties;
-    use HandlesBoundValues;
-    use HandlesValidationErrors;
 
     public string $name;
 
@@ -24,15 +19,13 @@ class FormSelect extends Component
 
     public array|Collection|null $options;
 
-    public mixed $selectedKey;
+    public mixed $value;
 
     public bool $multiple;
 
     public bool $floating;
 
-    public string $placeholder;
-
-    public string $selectedKeys;
+    public string $values;
 
     /**
      * Create a new component instance.
@@ -48,7 +41,9 @@ class FormSelect extends Component
         bool $multiple = false,
         bool $showErrors = true,
         bool $floating = false,
-        string $placeholder = '',
+        public bool $inline = false,
+        public string $placeholder = '',
+        public string $size = '',
         public ?string $valueField = null,
         public ?string $labelField = null,
         public ?string $disabledField = null,
@@ -59,25 +54,23 @@ class FormSelect extends Component
         $this->name = $name;
         $this->label = $label;
         $this->options = $options;
-        $this->placeholder = $placeholder;
         $this->setExtraAttributes($extraAttributes);
 
         if ($this->isNotWired()) {
-            $inputName = static::convertBracketsToDots(Str::before($name, '[]'));
+            $inputName = static::convertBracketsToDots($name);
 
             if (is_null($default)) {
                 $default = $this->getBoundValue($bind, $inputName);
             }
 
-            $this->selectedKey = old($inputName, $default);
+            $this->value = old($inputName, $default);
 
-            if ($this->selectedKey instanceof Arrayable) {
-                $this->selectedKey = $this->selectedKey->toArray();
+            if ($this->value instanceof Arrayable) {
+                $this->value = $this->value->toArray();
             }
         }
 
-        $this->selectedKey = Arr::wrap($this->selectedKey);
-        $this->selectedKeys = implode(',', $this->selectedKey);
+        $this->values = implode(',', Arr::wrap($this->value));
         $this->multiple = $multiple;
         $this->showErrors = $showErrors;
         $this->floating = $floating && !$multiple;
@@ -88,8 +81,6 @@ class FormSelect extends Component
         $this->childrenField = $childrenField ?? 'children';
 
         $this->options = $this->normalizeOptions($options);
-
-        //dd($this->options);
     }
 
     public function isSelected($key): bool
@@ -98,7 +89,7 @@ class FormSelect extends Component
             return false;
         }
 
-        return in_array($key, Arr::wrap($this->selectedKey));
+        return in_array($key, Arr::wrap($this->value));
     }
 
     public function nothingSelected(): bool
@@ -107,7 +98,7 @@ class FormSelect extends Component
             return false;
         }
 
-        return is_array($this->selectedKey) ? empty($this->selectedKey) : is_null($this->selectedKey);
+        return is_array($this->value) ? empty($this->value) : is_null($this->value);
     }
 
     protected function normalizeOptions(array|Collection|null $options): Collection

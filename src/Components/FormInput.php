@@ -2,23 +2,14 @@
 
 namespace Diviky\LaravelFormComponents\Components;
 
-use Diviky\LaravelFormComponents\Concerns\HandlesDefaultAndOldValue;
-use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 
 class FormInput extends Component
 {
-    use HandlesDefaultAndOldValue;
-    use HandlesValidationErrors;
-
     public string $name;
 
     public string $label;
-
-    public string $type;
-
-    public bool $floating;
 
     public mixed $value;
 
@@ -30,12 +21,14 @@ class FormInput extends Component
     public function __construct(
         string $name = '',
         string $label = '',
-        string $type = 'text',
+        public string $type = 'text',
+        public string $size = '',
         mixed $bind = null,
         mixed $default = null,
         public ?string $language = null,
         bool $showErrors = true,
-        bool $floating = false,
+        public bool $floating = false,
+        public bool $inline = false,
         string|HtmlString|array|Collection|null $extraAttributes = null,
         public ?array $settings = []
     ) {

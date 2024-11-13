@@ -3,9 +3,7 @@
 namespace Diviky\LaravelFormComponents\Components;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\HtmlString;
-use Illuminate\Support\ViewErrorBag;
 
 class Form extends Component
 {

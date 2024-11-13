@@ -1,4 +1,6 @@
-<div class="form-group">
+<div @class([
+    'form-group' => !$inline,
+])>
     @if ($floating)
         <div class="form-floating">
     @endif
@@ -18,16 +20,18 @@
             </x-form-input-group-text>
         @endisset
 
-        <select @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}" @endif
-            @if ($multiple) multiple @endif {{ $extraAttributes ?? '' }} {!! $attributes->except(['extra-attributes'])->merge([
-                    'class' => 'form-select',
+        <select {{ $wire() }} @if ($multiple) multiple @endif {{ $extraAttributes ?? '' }}
+            {!! $attributes->except(['extra-attributes'])->merge([
                     'id' => $id(),
                     'placeholder' => $placeholder,
                     'value-field' => $valueField,
                     'label-field' => $labelField,
                     'name' => $name,
-                    'data-selected' => $selectedKeys,
+                    'data-selected' => $values,
                 ])->class([
+                    'form-select' => true,
+                    'form-select-sm' => $size == 'sm',
+                    'form-select-lg' => $size == 'lg',
                     'is-invalid' => $hasError($name),
                 ]) !!}>
 

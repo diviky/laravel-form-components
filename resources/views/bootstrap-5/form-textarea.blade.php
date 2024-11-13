@@ -14,9 +14,7 @@
             'placeholder' => '',
         ])->class([
             'is-invalid' => $hasError($name),
-        ]) !!}
-        @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}" @endif
-        {{ $extraAttributes ?? '' }}>{!! $value !!}</textarea>
+        ]) !!} {{ $wire() }} {{ $extraAttributes ?? '' }}>{!! $value !!}</textarea>
 
     @if ($floating)
         <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />

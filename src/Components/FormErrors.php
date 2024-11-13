@@ -2,13 +2,8 @@
 
 namespace Diviky\LaravelFormComponents\Components;
 
-use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
-use Illuminate\Support\Str;
-
 class FormErrors extends Component
 {
-    use HandlesValidationErrors;
-
     public string $name;
 
     public string $bag;
@@ -24,7 +19,7 @@ class FormErrors extends Component
         public ?string $tag = null,
         public ?string $inputId = null,
     ) {
-        $this->name = static::convertBracketsToDots(Str::before($name, '[]'));
+        $this->name = static::convertBracketsToDots($name);
         $this->inputId = $inputId ?? $this->name;
         $this->tag = $tag ?? 'div';
         $this->bag = $bag;

@@ -16,9 +16,7 @@
                 'name' => $name,
                 'type' => 'checkbox',
                 'value' => $value,
-            ]) !!} {{ $extraAttributes ?? '' }}
-            @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}" @endif
-            @checked($checked) />
+            ]) !!} {{ $extraAttributes ?? '' }} {{ $wire() }} @checked($checked) />
 
         <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" class="form-check-label" />
 

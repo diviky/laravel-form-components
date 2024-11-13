@@ -38,4 +38,9 @@ trait HandlesDefaultAndOldValue
 
         $this->value = old("{$inputName}.{$language}", $default);
     }
+
+    public function getValue()
+    {
+        return $this->value;
+    }
 }

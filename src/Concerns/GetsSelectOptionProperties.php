@@ -60,7 +60,7 @@ trait GetsSelectOptionProperties
             : !empty($children);
     }
 
-    protected function optionProperty(mixed $option, string $field, mixed $default = null): mixed
+    public function optionProperty(mixed $option, string $field, mixed $default = null): mixed
     {
         if (is_array($option)) {
             return Arr::get($option, $field, $default);

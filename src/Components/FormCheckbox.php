@@ -2,19 +2,13 @@
 
 namespace Diviky\LaravelFormComponents\Components;
 
-use Diviky\LaravelFormComponents\Concerns\HandlesBoundValues;
-use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
-use Illuminate\Support\Str;
 
 class FormCheckbox extends Component
 {
-    use HandlesBoundValues;
-    use HandlesValidationErrors;
-
     public string $name;
 
     public string $label;
@@ -48,7 +42,7 @@ class FormCheckbox extends Component
 
         $this->setExtraAttributes($extraAttributes);
 
-        $inputName = static::convertBracketsToDots(Str::before($name, '[]'));
+        $inputName = static::convertBracketsToDots($name);
 
         if ($oldData = old($inputName)) {
             $this->checked = in_array($value, Arr::wrap($oldData));

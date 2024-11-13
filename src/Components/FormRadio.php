@@ -2,28 +2,21 @@
 
 namespace Diviky\LaravelFormComponents\Components;
 
-use Diviky\LaravelFormComponents\Concerns\HandlesBoundValues;
-use Diviky\LaravelFormComponents\Concerns\HandlesValidationErrors;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 
 class FormRadio extends Component
 {
-    use HandlesBoundValues;
-    use HandlesValidationErrors;
-
     public string $name;
 
     public string $label;
-
-    public int|string $value;
 
     public bool $checked = false;
 
     public function __construct(
         string $name = '',
         string $label = '',
-        int|string $value = 1,
+        mixed $value = 1,
         int|string|null $bind = null,
         bool $default = false,
         bool $showErrors = false,
@@ -34,6 +27,7 @@ class FormRadio extends Component
         $this->label = $label;
         $this->value = $value;
         $this->showErrors = $showErrors;
+
         $this->setExtraAttributes($extraAttributes);
 
         $inputName = static::convertBracketsToDots($name);

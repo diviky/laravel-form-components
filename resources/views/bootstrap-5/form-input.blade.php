@@ -1,4 +1,7 @@
-<div class="form-group @if ($type === 'hidden') d-none @endif">
+<div @class([
+    'form-group' => !$inline,
+    'd-none' => $type === 'hidden',
+])>
     @if ($floating)
         <div class="form-floating">
     @endif
@@ -26,17 +29,18 @@
         @endisset
 
         <input {!! $attributes->except(['extra-attributes'])->merge([
-                'class' => 'form-control',
                 'type' => $type,
                 'name' => $name,
                 'id' => $id(),
                 'placeholder' => null,
                 'value' => $value,
             ])->class([
+                'form-control' => true,
                 'form-control-color' => $type === 'color',
+                'form-control-sm' => $size == 'sm',
+                'form-control-lg' => $size == 'lg',
                 'is-invalid' => $hasError($name),
-            ]) !!} {{ $extraAttributes ?? '' }}
-            @if ($isWired()) wire:model{!! $wireModifier() !!}="{{ $name }}" @endif />
+            ]) !!} {{ $extraAttributes ?? '' }} {{ $wire() }} />
 
         @isset($append)
             <x-form-input-group-text :attributes="$append->attributes">
