@@ -11,6 +11,9 @@
 
     <div @class([
         'input-group' => isset($prepend) || isset($append),
+        'input-group-flat' => $attributes->has('flat'),
+        'input-group-sm' => (isset($prepend) || isset($append)) && $size == 'sm',
+        'input-group-lg' => (isset($prepend) || isset($append)) && $size == 'lg',
         'input-icon' => @isset($icon),
     ])>
 

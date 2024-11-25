@@ -70,6 +70,10 @@ class FormSelect extends Component
             }
         }
 
+        if ($multiple) {
+            $this->value = Arr::wrap($this->value);
+        }
+
         $this->values = implode(',', Arr::wrap($this->value));
         $this->multiple = $multiple;
         $this->showErrors = $showErrors;

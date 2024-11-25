@@ -87,10 +87,21 @@ abstract class Component extends BaseComponent
     public function entangle($attributes)
     {
         if (isset($attributes) && count($attributes->whereStartsWith('wire:model')->getIterator())) {
-            return '$wire.entangle(\'' . $attributes->wire('model') . "')";
+            return '$wire.entangle(\'' . $attributes->wire('model') . "')" . $this->getWireModifier($attributes);
         }
 
         return json_encode($this->getValue());
+    }
+
+    protected function getWireModifier($attributes)
+    {
+        $key = array_key_first($attributes->whereStartsWith('wire:model')->getAttributes());
+
+        if ($key && preg_match('/wire:model([^=]*)/', $key, $matches)) {
+            return '.live';
+        }
+
+        return '';
     }
 
     public function wire()

@@ -1,11 +1,8 @@
 <div @class([
     'form-group' => !$inline,
     'd-none' => $type === 'hidden',
+    'form-floating' => $floating,
 ])>
-    @if ($floating)
-        <div class="form-floating">
-    @endif
-
     @if (!$floating)
         <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
     @endif
@@ -14,6 +11,8 @@
         'input-group' => isset($prepend) || isset($append),
         'input-icon' => @isset($icon),
         'input-group-flat' => $attributes->has('flat'),
+        'input-group-sm' => (isset($prepend) || isset($append)) && $size == 'sm',
+        'input-group-lg' => (isset($prepend) || isset($append)) && $size == 'lg',
     ])>
 
         @isset($prepend)
@@ -52,11 +51,6 @@
         <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
     @endif
 
-    @if ($floating)
-</div>
-@endif
-
-<x-help> {!! $help ?? null !!} </x-help>
-<x-form-errors :name="$name" />
-
+    <x-help> {!! $help ?? null !!} </x-help>
+    <x-form-errors :name="$name" />
 </div>

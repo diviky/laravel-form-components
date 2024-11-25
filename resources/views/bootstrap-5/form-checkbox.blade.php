@@ -3,15 +3,19 @@
         <div class="mb-2 text-bold">{{ $attributes->get('title') }}</div>
     @endif
 
-    <div class="form-check @if (null !== $attributes->get('inline')) form-check-inline @endif">
+    <div @class([
+        'form-check',
+        'form-check-inline' => null !== $attributes->get('inline'),
+        'm-0' => null !== $attributes->get('compact'),
+    ])>
         @if ($copy !== false)
             <input type="hidden" value="{{ $copy }}" name="{{ $name }}" />
         @endif
 
         <input {!! $attributes->except(['extra-attributes'])->class([
                 'is-invalid' => $hasError($name),
+                'form-check-input',
             ])->merge([
-                'class' => 'form-check-input',
                 'id' => $id(),
                 'name' => $name,
                 'type' => 'checkbox',
@@ -25,7 +29,5 @@
         </span>
     </div>
 
-    @if ($hasErrorAndShow($name))
-        <x-form-errors :name="$name" />
-    @endif
+    <x-form-errors :name="$name" />
 </div>
