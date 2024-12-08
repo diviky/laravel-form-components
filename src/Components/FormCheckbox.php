@@ -27,7 +27,7 @@ class FormCheckbox extends Component
         string $label = '',
         mixed $value = 1,
         mixed $bind = null,
-        bool $default = false,
+        ?bool $default = false,
         bool $showErrors = true,
         public mixed $copy = '0',
         // Extra attributes
@@ -61,7 +61,7 @@ class FormCheckbox extends Component
                 return;
             }
 
-            $this->checked = is_null($boundValue) ? $default : ($boundValue == $value);
+            $this->checked = is_null($boundValue) ? boolval($default) : ($boundValue == $value);
         }
     }
 

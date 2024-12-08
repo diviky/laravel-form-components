@@ -43,6 +43,28 @@ trait HandlesBoundValues
     /**
      * Get an item from the latest bound target.
      *
+     * @return mixed
+     */
+    public function boundValue(string $name, mixed $default = null)
+    {
+        $name = static::convertBracketsToDots($name);
+
+        return $this->getBoundValue(null, $name) ?? $default;
+    }
+
+    /**
+     * Converts a bracket-notation to a dotted-notation
+     *
+     * @param  string  $name
+     */
+    protected static function convertBracketsToDots($name): string
+    {
+        return str_replace(['[', ']'], ['.', ''], Str::before($name, '[]'));
+    }
+
+    /**
+     * Get an item from the latest bound target.
+     *
      * @param  mixed  $bind
      * @return mixed
      */

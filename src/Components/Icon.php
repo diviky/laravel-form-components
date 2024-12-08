@@ -13,12 +13,13 @@ class Icon extends Component
         public ?string $name = null,
         public ?string $label = null,
         public ?string $action = null,
-        public ?string $size = null
+        public ?string $size = null,
+        public bool $gap = false
     ) {}
 
     public function icon(): string|Stringable
     {
-        if (empty($this->name)) {
+        if (is_null($this->name) || $this->name === '') {
             return '';
         }
 

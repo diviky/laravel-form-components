@@ -2,10 +2,13 @@
 
 namespace Diviky\LaravelFormComponents;
 
+use Diviky\LaravelFormComponents\Concerns\HandlesBoundValues;
 use Illuminate\Support\Arr;
 
 class FormDataBinder
 {
+    use HandlesBoundValues;
+
     /**
      * Tree of bound targets.
      */
@@ -14,12 +17,12 @@ class FormDataBinder
     /**
      * Wired to a Livewire component.
      */
-    protected $wire = false;
+    protected bool|string $wire = false;
 
     /**
      * Whether the default wire has been verified once.
      */
-    protected $loadDefaultWire = true;
+    protected bool $loadDefaultWire = true;
 
     /**
      * Bind a target to the current instance

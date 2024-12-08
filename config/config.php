@@ -44,6 +44,11 @@ return [
             'class' => Components\FormInput::class,
         ],
 
+        'form-hidden' => [
+            'view' => 'form-components::{framework}.form-hidden',
+            'class' => Components\FormHidden::class,
+        ],
+
         'form-input-group' => [
             'view' => 'form-components::{framework}.form-input-group',
             'class' => Components\FormInputGroup::class,

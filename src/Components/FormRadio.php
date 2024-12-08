@@ -18,7 +18,7 @@ class FormRadio extends Component
         string $label = '',
         mixed $value = 1,
         int|string|null $bind = null,
-        bool $default = false,
+        ?bool $default = false,
         bool $showErrors = false,
         public ?array $settings = [],
         string|HtmlString|array|Collection|null $extraAttributes = null,
@@ -42,7 +42,7 @@ class FormRadio extends Component
             if (!is_null($boundValue)) {
                 $this->checked = $boundValue == $this->value;
             } else {
-                $this->checked = $default;
+                $this->checked = boolval($default);
             }
         }
     }

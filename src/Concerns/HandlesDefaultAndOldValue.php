@@ -4,8 +4,6 @@ namespace Diviky\LaravelFormComponents\Concerns;
 
 trait HandlesDefaultAndOldValue
 {
-    use HandlesBoundValues;
-
     protected function setValue(
         string $name,
         mixed $bind = null,
