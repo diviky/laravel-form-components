@@ -4,7 +4,8 @@
 ]) !!}
     @if ($attributes->has('reset')) data-reset="true" @endif
     @if ($attributes->has('render')) data-render="true" @endif
-    @if ($attributes->has('hide')) data-hide="true" @endif @if ($attributes->has('easy')) easysubmit @endif
+    @if ($attributes->has('close')) data-hide="true" @endif @if ($attributes->has('hide')) data-hide="true" @endif
+    @if ($attributes->has('easy')) easysubmit @endif
     @if ($hasFiles) enctype="multipart/form-data" @endif
     @unless ($spellcheck)
         spellcheck="false"
