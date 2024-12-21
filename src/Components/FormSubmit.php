@@ -10,7 +10,9 @@ class FormSubmit extends Component
         bool $outline = false,
         public bool $ghost = false,
         public bool $plain = false,
+        public bool $disabled = false,
     ) {
         $this->outline = $outline ? 'outline-' : ($ghost ? 'ghost-' : '');
+        $this->disabled = boolval($disabled);
     }
 }

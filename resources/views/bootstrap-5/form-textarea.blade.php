@@ -8,11 +8,14 @@
     @endif
 
     <textarea {!! $attributes->except(['extra-attributes'])->merge([
-            'class' => 'form-control',
             'name' => $name,
             'id' => $id(),
             'placeholder' => '',
         ])->class([
+            'form-control' => true,
+            'form-control-color' => $type === 'color',
+            'form-control-sm' => $size == 'sm',
+            'form-control-lg' => $size == 'lg',
             'is-invalid' => $hasError($name),
         ]) !!} {{ $wire() }} {{ $extraAttributes ?? '' }}>{!! $value !!}</textarea>
 

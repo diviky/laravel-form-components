@@ -4,7 +4,7 @@
     ])->class([
         'btn',
         'dropdown-toggle' => $attributes->has('dropdown'),
-        'disabled' => $attributes->has('disabled'),
+        'disabled' => $disabled,
         'btn-sm' => $attributes->has('sm') || $attributes->has('small'),
         'btn-lg' => $attributes->has('lg') || $attributes->has('large'),
         'btn-link' => $attributes->has('link'),
@@ -25,7 +25,8 @@
         'btn-' . $attributes->get('size') => $attributes->has('size'),
         'btn-' . $attributes->get('variant') => $attributes->has('variant'),
         'btn-primary' => !$plain && !$outline,
-    ])->except(['label']) !!} @if ($attributes->has('dropdown')) data-bs-toggle="dropdown" @endif>
+    ])->except(['label', 'disabled']) !!} @if ($disabled) disabled @endif
+    @if ($attributes->has('dropdown')) data-bs-toggle="dropdown" @endif>
 
     @if ($attributes->has('icon'))
         <x-icon :name="$attributes->get('icon')" />

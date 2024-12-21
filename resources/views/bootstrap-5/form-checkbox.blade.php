@@ -1,4 +1,6 @@
-<div>
+<div @class([
+    'd-inline' => null !== $attributes->get('inline'),
+])>
     @if ($attributes->has('title'))
         <div class="mb-2 text-bold">{{ $attributes->get('title') }}</div>
     @endif

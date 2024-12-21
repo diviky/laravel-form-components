@@ -11,6 +11,8 @@ class FormRadio extends Component
 
     public string $label;
 
+    public mixed $value;
+
     public bool $checked = false;
 
     public function __construct(
