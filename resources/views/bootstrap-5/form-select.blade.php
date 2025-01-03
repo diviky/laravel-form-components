@@ -23,6 +23,12 @@
             </x-form-input-group-text>
         @endisset
 
+        @isset($icon)
+            <span class="input-icon-addon">
+                <x-icon :name="$icon" />
+            </span>
+        @endisset
+
         <select {{ $wire() }} @if ($multiple) multiple @endif {{ $extraAttributes ?? '' }}
             {!! $attributes->except(['extra-attributes'])->merge([
                     'id' => $id(),

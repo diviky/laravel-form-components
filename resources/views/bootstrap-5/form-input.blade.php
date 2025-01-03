@@ -23,7 +23,7 @@
 
         @isset($icon)
             <span class="input-icon-addon">
-                {!! $icon !!}
+                <x-icon :name="$icon" />
             </span>
         @endisset
 

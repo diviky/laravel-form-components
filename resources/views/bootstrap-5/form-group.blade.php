@@ -1,7 +1,9 @@
-<div {!! $attributes->merge(['class' => $hasError($name) ? 'is-invalid' : '']) !!}>
+<div {!! $attributes->class(['is-invalid' => $hasError($name)]) !!}>
     <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" />
 
-    <div class="@if ($inline) d-flex flex-row flex-wrap inline-space @endif">
+    <div @class([
+        'd-flex flex-row flex-wrap inline-space' => $inline,
+    ])>
         {!! $slot !!}
     </div>
 

@@ -24,7 +24,8 @@
                 'value' => $value,
             ]) !!} {{ $extraAttributes ?? '' }} {{ $wire() }} @checked($checked) />
 
-        <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" class="form-check-label" />
+        <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()"
+            @class(['form-check-label', 'm-0']) />
 
         <span class="form-check-description">
             <x-help> {!! $help ?? null !!} </x-help>
