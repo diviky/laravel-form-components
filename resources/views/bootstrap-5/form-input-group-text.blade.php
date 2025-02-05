@@ -1,1 +1,1 @@
-<span {!! $attributes->class(['input-group-text']) !!}>{!! $slot !!}</span>
+<span {!! $attributes->class(['input-group-text' => $text]) !!}>{!! $slot !!}</span>

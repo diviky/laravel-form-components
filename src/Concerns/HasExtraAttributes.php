@@ -11,14 +11,14 @@ trait HasExtraAttributes
 {
     public ?HtmlString $extraAttributes = null;
 
-    public function setExtraAttributes(null|string|HtmlString|array|Collection $attributes): void
+    protected function setExtraAttributes(null|string|HtmlString|array|Collection $attributes): void
     {
         if (is_null($attributes)) {
             return;
         }
 
         if (is_iterable($attributes)) {
-            $this->withAttributes(collect($attributes)->filter()->toArray());
+            $this->mergeAttributes(collect($attributes)->filter()->toArray());
         }
 
         $this->extraAttributes = is_iterable($attributes)

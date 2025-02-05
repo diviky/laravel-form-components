@@ -1,5 +1,12 @@
-<div {!! $attributes->class(['is-invalid' => $hasError($name)]) !!}>
-    <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" />
+<div
+    {{ $attributes->only(['class'])->class([
+        'form-group' => !$inline,
+        'form-floating' => $floating,
+        'is-invalid' => $hasError($name),
+    ]) }}>
+    @if (!$floating)
+        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
+    @endif
 
     <div @class([
         'd-flex flex-row flex-wrap inline-space' => $inline,
@@ -7,9 +14,10 @@
         {!! $slot !!}
     </div>
 
-    <x-help> {!! $help ?? null !!} </x-help>
-
-    @if ($hasErrorAndShow($name))
-        <x-form-errors :name="$name" class="d-block" />
+    @if ($floating)
+        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
     @endif
+
+    <x-help> {!! $help ?? null !!} </x-help>
+    <x-form-errors :name="$name" />
 </div>

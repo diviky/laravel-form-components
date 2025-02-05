@@ -15,8 +15,13 @@ class FormGroup extends Component
      *
      * @return void
      */
-    public function __construct(string $name = '', string $label = '', bool $inline = false, bool $showErrors = true)
-    {
+    public function __construct(
+        string $name = '',
+        string $label = '',
+        bool $inline = false,
+        bool $showErrors = true,
+        public bool $floating = false,
+    ) {
         $this->name = $name;
         $this->label = $label;
         $this->inline = $inline;

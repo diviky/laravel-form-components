@@ -31,12 +31,12 @@ class Form extends Component
         public bool $hasFiles = false,
         public bool $spellcheck = false,
         public ?array $settings = [],
-        HtmlString|array|string|Collection|null $extraAttributes = null,
+        HtmlString|array|string|Collection|null $extraAttributes = [],
     ) {
         $this->method = strtoupper($method);
-        $this->setExtraAttributes($extraAttributes);
-
         $this->spoofMethod = in_array($this->method, ['PUT', 'PATCH', 'DELETE']);
         $this->style = !is_null($style) ? $style : config('form-components.form_style');
+
+        $this->setExtraAttributes($extraAttributes);
     }
 }

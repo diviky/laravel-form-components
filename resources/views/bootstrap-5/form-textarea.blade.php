@@ -4,7 +4,7 @@
     @endif
 
     @if (!$floating)
-        <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
     @endif
 
     <textarea {!! $attributes->except(['extra-attributes'])->merge([
@@ -20,7 +20,7 @@
         ]) !!} {{ $wire() }} {{ $extraAttributes ?? '' }}>{!! $value !!}</textarea>
 
     @if ($floating)
-        <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
     @endif
 
     @if ($floating)

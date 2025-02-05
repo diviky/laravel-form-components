@@ -37,7 +37,7 @@ trait HandlesDefaultAndOldValue
         $this->value = old("{$inputName}.{$language}", $default);
     }
 
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }

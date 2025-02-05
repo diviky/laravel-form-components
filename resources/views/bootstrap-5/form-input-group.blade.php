@@ -1,5 +1,5 @@
 <div class="mb-3">
-    <x-form-label :label="$label" :required="$attributes->has('required')" :title="$attributes->get('title')" />
+    <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" />
 
     <div {!! $attributes->class(['input-group', 'is-invalid' => $hasError($name)]) !!}>
         {!! $slot !!}

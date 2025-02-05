@@ -84,7 +84,7 @@ abstract class Component extends BaseComponent
         return $this->id = Str::random(4);
     }
 
-    public function entangle($attributes)
+    public function entangle($attributes): string|false
     {
         if (isset($attributes) && count($attributes->whereStartsWith('wire:model')->getIterator())) {
             return '$wire.entangle(\'' . $attributes->wire('model') . "')" . $this->getWireModifier($attributes);
@@ -93,18 +93,20 @@ abstract class Component extends BaseComponent
         return json_encode($this->getValue());
     }
 
-    protected function getWireModifier($attributes)
+    protected function getWireModifier($attributes): string
     {
         $key = array_key_first($attributes->whereStartsWith('wire:model')->getAttributes());
 
         if ($key && preg_match('/wire:model([^=]*)/', $key, $matches)) {
-            return '.live';
+            if (!empty($matches[1])) {
+                return $matches[1];
+            }
         }
 
         return '';
     }
 
-    public function wire()
+    public function wire(): string
     {
         if ($this->isWired()) {
             return 'wire:model' . $this->wireModifier() . '=' . $this->name;
@@ -144,5 +146,31 @@ abstract class Component extends BaseComponent
     public function isDisabled(): bool
     {
         return $this->attributes->has('disabled') && $this->attributes->get('disabled') == true;
+    }
+
+    protected function mergeAttributes(array $attributes)
+    {
+        $this->attributes = $this->attributes ?: $this->newAttributeBag();
+
+        $this->attributes = $this->attributes->merge($attributes);
+
+        return $this;
+    }
+
+    /**
+     * Set the extra attributes that the component should make available.
+     *
+     * @return $this
+     */
+    public function withAttributes(array $attributes)
+    {
+        $this->attributes = $this->attributes ?: $this->newAttributeBag();
+
+        $all = $this->attributes->all();
+
+        $this->attributes->setAttributes($attributes);
+        $this->mergeAttributes($all);
+
+        return $this;
     }
 }
