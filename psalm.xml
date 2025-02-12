@@ -28,11 +28,6 @@
                 <directory name="src"/>
             </errorLevel>
         </PropertyNotSetInConstructor>
-        <UndefinedMagicPropertyFetch>
-            <errorLevel type="suppress">
-                <directory name="src"/>
-            </errorLevel>
-        </UndefinedMagicPropertyFetch>
         <UndefinedThisPropertyFetch>
             <errorLevel type="suppress">
                 <directory name="src"/>
@@ -43,11 +38,6 @@
                 <directory name="src"/>
             </errorLevel>
         </UndefinedThisPropertyAssignment>
-        <UndefinedMagicPropertyAssignment>
-            <errorLevel type="suppress">
-                <directory name="src"/>
-            </errorLevel>
-        </UndefinedMagicPropertyAssignment>
         <RiskyTruthyFalsyComparison>
             <errorLevel type="suppress">
                 <directory name="src"/>

@@ -89,7 +89,7 @@ trait HandlesBoundValues
         }
 
         if ($bind instanceof stdClass) {
-            $bind = json_decode(json_encode($bind), true);
+            $bind = json_decode((string) json_encode($bind), true);
         }
 
         $boundValue = data_get($bind, $name);

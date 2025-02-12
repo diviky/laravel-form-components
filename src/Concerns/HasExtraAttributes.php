@@ -13,6 +13,8 @@ trait HasExtraAttributes
 
     protected function setExtraAttributes(null|string|HtmlString|array|Collection $attributes): void
     {
+        $this->ensureAttribute();
+
         if (is_null($attributes)) {
             return;
         }

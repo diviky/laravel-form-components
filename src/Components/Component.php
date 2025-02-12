@@ -46,6 +46,8 @@ abstract class Component extends BaseComponent
      */
     public function isWired(): bool
     {
+        $this->ensureAttribute();
+
         if (count($this->attributes->whereStartsWith('wire:model')->getIterator())) {
             return false;
         }
@@ -151,7 +153,7 @@ abstract class Component extends BaseComponent
 
     protected function mergeAttributes(array $attributes): self
     {
-        $this->attributes = $this->attributes ?: $this->newAttributeBag();
+        $this->ensureAttribute();
 
         $this->attributes = $this->attributes->merge($attributes);
 
@@ -165,7 +167,7 @@ abstract class Component extends BaseComponent
      */
     public function withAttributes(array $attributes)
     {
-        $this->attributes = $this->attributes ?: $this->newAttributeBag();
+        $this->ensureAttribute();
 
         $all = $this->attributes->all();
 
@@ -173,5 +175,10 @@ abstract class Component extends BaseComponent
         $this->mergeAttributes($all);
 
         return $this;
+    }
+
+    protected function ensureAttribute(): void
+    {
+        $this->attributes = $this->attributes ?: $this->newAttributeBag();
     }
 }
