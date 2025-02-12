@@ -13,8 +13,6 @@ class FormSelect extends Component
 {
     use GetsSelectOptionProperties;
 
-    public string $name;
-
     public string $label;
 
     public array|Collection|null $options;

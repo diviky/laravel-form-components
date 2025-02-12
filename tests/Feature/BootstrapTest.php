@@ -6,7 +6,7 @@ use Diviky\LaravelFormComponents\Tests\TestCase;
 
 class BootstrapTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

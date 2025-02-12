@@ -9,8 +9,6 @@ use Illuminate\Support\HtmlString;
 
 class FormCheckbox extends Component
 {
-    public string $name;
-
     public string $label;
 
     public mixed $value;

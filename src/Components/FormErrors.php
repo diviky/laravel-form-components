@@ -4,8 +4,6 @@ namespace Diviky\LaravelFormComponents\Components;
 
 class FormErrors extends Component
 {
-    public string $name;
-
     public string $bag;
 
     /**

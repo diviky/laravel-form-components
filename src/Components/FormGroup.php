@@ -4,8 +4,6 @@ namespace Diviky\LaravelFormComponents\Components;
 
 class FormGroup extends Component
 {
-    public string $name;
-
     public string $label;
 
     public bool $inline = false;

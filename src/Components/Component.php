@@ -9,6 +9,7 @@ use Diviky\LaravelFormComponents\Concerns\HasExtraAttributes;
 use Diviky\LaravelFormComponents\FormDataBinder;
 use Illuminate\Support\Str;
 use Illuminate\View\Component as BaseComponent;
+use Illuminate\View\ComponentAttributeBag;
 
 abstract class Component extends BaseComponent
 {
@@ -23,6 +24,8 @@ abstract class Component extends BaseComponent
      * @var string
      */
     protected $id;
+
+    public ?string $name = null;
 
     /**
      * {@inheritDoc}
@@ -43,7 +46,7 @@ abstract class Component extends BaseComponent
      */
     public function isWired(): bool
     {
-        if (isset($this->attributes) && count($this->attributes->whereStartsWith('wire:model')->getIterator())) {
+        if (count($this->attributes->whereStartsWith('wire:model')->getIterator())) {
             return false;
         }
 
@@ -77,23 +80,23 @@ abstract class Component extends BaseComponent
             return $this->id;
         }
 
-        if (isset($this->name)) {
+        if (!empty($this->name)) {
             return $this->id = $this->generateIdByName() . '_' . Str::random(4);
         }
 
         return $this->id = Str::random(4);
     }
 
-    public function entangle($attributes): string|false
+    public function entangle(ComponentAttributeBag $attributes): string|false
     {
-        if (isset($attributes) && count($attributes->whereStartsWith('wire:model')->getIterator())) {
+        if (count($attributes->whereStartsWith('wire:model')->getIterator())) {
             return '$wire.entangle(\'' . $attributes->wire('model') . "')" . $this->getWireModifier($attributes);
         }
 
         return json_encode($this->getValue());
     }
 
-    protected function getWireModifier($attributes): string
+    protected function getWireModifier(ComponentAttributeBag $attributes): string
     {
         $key = array_key_first($attributes->whereStartsWith('wire:model')->getAttributes());
 
@@ -125,10 +128,8 @@ abstract class Component extends BaseComponent
 
     /**
      * Converts a bracket-notation to a dotted-notation
-     *
-     * @param  string  $name
      */
-    protected static function convertBracketsToDots($name): string
+    protected static function convertBracketsToDots(string $name): string
     {
         return str_replace(['[', ']'], ['.', ''], Str::before($name, '[]'));
     }
@@ -148,7 +149,7 @@ abstract class Component extends BaseComponent
         return $this->attributes->has('disabled') && $this->attributes->get('disabled') == true;
     }
 
-    protected function mergeAttributes(array $attributes)
+    protected function mergeAttributes(array $attributes): self
     {
         $this->attributes = $this->attributes ?: $this->newAttributeBag();
 

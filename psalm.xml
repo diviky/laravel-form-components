@@ -48,5 +48,15 @@
                 <directory name="src"/>
             </errorLevel>
         </UndefinedMagicPropertyAssignment>
+        <RiskyTruthyFalsyComparison>
+            <errorLevel type="suppress">
+                <directory name="src"/>
+            </errorLevel>
+        </RiskyTruthyFalsyComparison>
+        <RedundantConditionGivenDocblockType>
+            <errorLevel type="suppress">
+                <directory name="src"/>
+            </errorLevel>
+        </RedundantConditionGivenDocblockType>
     </issueHandlers>
 </psalm>

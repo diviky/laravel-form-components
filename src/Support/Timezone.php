@@ -160,7 +160,7 @@ class Timezone
      * timezone offsets for certain timezones than when tests are
      * ran locally. This may need to be addressed in the future...
      */
-    protected function normalizeOffset(string $timezone, $offset): bool|string
+    protected function normalizeOffset(string $timezone, string $offset): bool|string
     {
         return match ($timezone) {
             'Africa/Juba' => '+02:00',

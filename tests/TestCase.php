@@ -17,7 +17,7 @@ abstract class TestCase extends BaseTestCase
         return version_compare(app()->version(), '10.0', '>=');
     }
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

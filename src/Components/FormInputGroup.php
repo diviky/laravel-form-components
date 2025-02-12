@@ -4,8 +4,6 @@ namespace Diviky\LaravelFormComponents\Components;
 
 class FormInputGroup extends Component
 {
-    public string $name;
-
     public string $label;
 
     /**

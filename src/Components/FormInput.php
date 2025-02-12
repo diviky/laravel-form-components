@@ -7,8 +7,6 @@ use Illuminate\Support\HtmlString;
 
 class FormInput extends Component
 {
-    public string $name;
-
     public string $label;
 
     public mixed $value;
@@ -24,7 +22,7 @@ class FormInput extends Component
         public string $type = 'text',
         public string $size = '',
         mixed $bind = null,
-        mixed $default = null,
+        public mixed $default = null,
         public ?string $language = null,
         bool $showErrors = true,
         public bool $floating = false,
