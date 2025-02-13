@@ -85,7 +85,7 @@ class FormSelect extends Component
         $this->options = $this->normalizeOptions($options);
     }
 
-    public function isSelected($key): bool
+    public function isSelected(null|string|int $key): bool
     {
         if ($this->isWired()) {
             return false;

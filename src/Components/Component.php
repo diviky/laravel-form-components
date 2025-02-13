@@ -125,7 +125,7 @@ abstract class Component extends BaseComponent
      */
     protected function generateIdByName(): string
     {
-        return 'auto_id_' . trim(str_replace(['[', ']'], ['_', ''], $this->name), '_');
+        return 'auto_id_' . trim(str_replace(['[', ']'], ['_', ''], strval($this->name)), '_');
     }
 
     /**
