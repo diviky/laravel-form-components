@@ -39,6 +39,7 @@ class FormSelect extends Component
         bool $multiple = false,
         bool $showErrors = true,
         bool $floating = false,
+        public ?string $language = null,
         public bool $inline = false,
         public string $placeholder = '',
         public string $size = '',
@@ -54,18 +55,16 @@ class FormSelect extends Component
         $this->options = $options;
         $this->setExtraAttributes($extraAttributes);
 
-        if ($this->isNotWired()) {
-            $inputName = static::convertBracketsToDots($name);
+        $inputName = static::convertBracketsToDots($name);
 
-            if (is_null($default)) {
-                $default = $this->getBoundValue($bind, $inputName);
-            }
+        $boundValue = $this->getBoundValue($bind, $inputName);
 
-            $this->value = old($inputName, $default);
+        $default = is_null($boundValue) ? $default : $boundValue;
 
-            if ($this->value instanceof Arrayable) {
-                $this->value = $this->value->toArray();
-            }
+        $this->value = old($inputName, $default);
+
+        if ($this->value instanceof Arrayable) {
+            $this->value = $this->value->toArray();
         }
 
         if ($multiple) {

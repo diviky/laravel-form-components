@@ -54,7 +54,7 @@ trait HandlesValidationErrors
         return $this->getErrorBag($bag)->isNotEmpty();
     }
 
-    public function getMessages($bag = 'default')
+    public function getMessages($bag = 'default'): array
     {
         return $this->getErrorBag($bag)->all();
     }

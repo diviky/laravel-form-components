@@ -30,6 +30,7 @@ abstract class Component extends BaseComponent
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function render()
     {
         $alias = Str::kebab(class_basename($this));
@@ -165,6 +166,7 @@ abstract class Component extends BaseComponent
      *
      * @return $this
      */
+    #[\Override]
     public function withAttributes(array $attributes)
     {
         $this->ensureAttribute();

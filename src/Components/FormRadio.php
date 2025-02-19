@@ -50,6 +50,7 @@ class FormRadio extends Component
     /**
      * Generates an ID by the name and value attributes.
      */
+    #[\Override]
     protected function generateIdByName(): string
     {
         return 'auto_id_' . $this->name . '_' . $this->value;
