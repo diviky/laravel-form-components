@@ -144,7 +144,10 @@ abstract class Component extends BaseComponent
 
     public function isRequired(): bool
     {
-        return $this->attributes->has('required') && $this->attributes->get('required') == true;
+        return $this->attributes->has('required')
+        && ($this->attributes->get('required') == true
+        || $this->attributes->get('required') == '1'
+        );
     }
 
     public function isDisabled(): bool

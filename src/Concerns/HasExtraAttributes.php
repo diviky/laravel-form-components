@@ -11,6 +11,8 @@ trait HasExtraAttributes
 {
     public ?HtmlString $extraAttributes = null;
 
+    public array $properties = [];
+
     protected function setExtraAttributes(null|string|HtmlString|array|Collection $attributes): void
     {
         $this->ensureAttribute();
@@ -20,7 +22,14 @@ trait HasExtraAttributes
         }
 
         if (is_iterable($attributes)) {
+            $this->properties = $attributes;
             $this->mergeAttributes(collect($attributes)->filter()->toArray());
+        }
+
+        if ($attributes instanceof Collection) {
+            $this->extraAttributes = $this->getExtraAttributesFromIterable($attributes);
+
+            return;
         }
 
         $this->extraAttributes = is_iterable($attributes)

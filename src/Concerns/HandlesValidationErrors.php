@@ -46,15 +46,13 @@ trait HandlesValidationErrors
 
     /**
      * Returns a boolean wether the error bag is not empty.
-     *
-     * @param  string  $bag
      */
-    public function hasErrors($bag = 'default'): bool
+    public function hasErrors(string $bag = 'default'): bool
     {
         return $this->getErrorBag($bag)->isNotEmpty();
     }
 
-    public function getMessages($bag = 'default'): array
+    public function getMessages(string $bag = 'default'): array
     {
         return $this->getErrorBag($bag)->all();
     }
