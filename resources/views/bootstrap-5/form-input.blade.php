@@ -9,7 +9,8 @@
     @endif
 
     <div @class([
-        'input-group' => isset($prepend) || isset($append),
+        'input-group' =>
+            isset($prepend) || isset($append) || isset($before) || isset($after),
         'input-icon' => @isset($icon),
         'input-group-flat' => $attributes->has('flat'),
         'input-group-sm' => (isset($prepend) || isset($append)) && $size == 'sm',
@@ -20,6 +21,10 @@
             <x-form-input-group-text :attributes="$prepend->attributes">
                 {!! $prepend !!}
             </x-form-input-group-text>
+        @endisset
+
+        @isset($before)
+            {!! $before !!}
         @endisset
 
         @isset($icon)
@@ -47,7 +52,12 @@
                 {!! $append !!}
             </x-form-input-group-text>
         @endisset
+
+        @isset($after)
+            {!! $after !!}
+        @endisset
     </div>
+
     @if ($floating)
         <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
     @endif
