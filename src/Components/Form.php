@@ -28,6 +28,8 @@ class Form extends Component
     public function __construct(
         string $method = 'POST',
         ?string $style = null,
+        ?string $route = null,
+        public ?string $action = null,
         public bool $hasFiles = false,
         public bool $spellcheck = false,
         public ?array $settings = [],
@@ -36,6 +38,10 @@ class Form extends Component
         $this->method = strtoupper($method);
         $this->spoofMethod = in_array($this->method, ['PUT', 'PATCH', 'DELETE']);
         $this->style = !is_null($style) ? $style : config('form-components.form_style');
+
+        if ($route) {
+            $this->action = route($route);
+        }
 
         $this->setExtraAttributes($extraAttributes);
     }

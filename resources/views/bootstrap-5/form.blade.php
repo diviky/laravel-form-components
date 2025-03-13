@@ -1,4 +1,4 @@
-<form method="{{ $spoofMethod ? 'POST' : $method }}" {!! $attributes->class([
+<form action="{{ $action }}" method="{{ $spoofMethod ? 'POST' : $method }}" {!! $attributes->class([
     'needs-validation' => $hasErrors(),
     'form-floated' => $style == 'floated' || $attributes->has('floated'),
 ]) !!}

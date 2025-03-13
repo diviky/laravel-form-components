@@ -5,7 +5,7 @@ use Diviky\LaravelFormComponents\Components;
 return [
     'prefix' => env('COMPONENTS_PREFIX'),
 
-    /** tailwind | tailwind-2 | tailwind-forms-simple | bootstrap-4 | bootstrap-5 */
+    /** tailwind | bootstrap-5 */
     'framework' => env('COMPONENTS_FRAMEWORK', 'bootstrap-5'),
 
     'use_eloquent_date_casting' => false,
