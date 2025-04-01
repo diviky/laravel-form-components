@@ -1,22 +1,7 @@
 {
     "name": "diviky/laravel-form-components",
     "description": "Blade components to rapidly build forms with Tailwind CSS Custom Forms and Bootstrap 4.",
-    "keywords": [
-        "tailwind",
-        "tailwindcss",
-        "bootstrap",
-        "bootstrap4",
-        "bootstrap5",
-        "bootstrap-4",
-        "bootstrap-5",
-        "laravel",
-        "form",
-        "forms",
-        "form-builder",
-        "form-components",
-        "laravel-form-builder",
-        "laravel-form-components"
-    ],
+    "keywords": [],
     "homepage": "https://github.com/diviky/laravel-form-components",
     "license": "MIT",
     "type": "library",
@@ -34,7 +19,7 @@
     ],
     "require": {
         "php": "^8.3",
-        "illuminate/support": "^10.0|^11.0",
+        "illuminate/support": "^11.0|^12.0",
         "symfony/http-foundation": "^6.0|^7.0"
     },
     "require-dev": {
