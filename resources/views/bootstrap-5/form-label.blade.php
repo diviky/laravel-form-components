@@ -1,7 +1,7 @@
 @if ($label)
     <label {!! $attributes->merge(['class' => 'form-label']) !!}>
         <span
-            @if ($attributes->has('title')) class="text-underline" data-toggle="tooltip" title="{{ $attributes->get('title') }}" @endif>
+            @if ($attributes->has('title')) class="text-underline" data-bs-toggle="tooltip" title="{{ $attributes->get('title') }}" @endif>
             {{ $label }}
 
             @if ($required)
@@ -12,7 +12,7 @@
         </span>
 
         @if ($hint)
-            <span class="cursor-help" data-toggle="tooltip" title="{!! $hint !!}">
+            <span class="cursor-help" data-bs-toggle="tooltip" title="{!! $hint !!}">
                 <x-icon name="help" />
             </span>
         @endif

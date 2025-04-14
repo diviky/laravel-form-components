@@ -33,6 +33,7 @@ class Form extends Component
         public bool $hasFiles = false,
         public bool $spellcheck = false,
         public ?array $settings = [],
+        ?array $params = [],
         HtmlString|array|string|Collection|null $extraAttributes = [],
     ) {
         $this->method = strtoupper($method);
@@ -40,7 +41,7 @@ class Form extends Component
         $this->style = !is_null($style) ? $style : config('form-components.form_style');
 
         if ($route) {
-            $this->action = route($route);
+            $this->action = route($route, $params);
         }
 
         $this->setExtraAttributes($extraAttributes);

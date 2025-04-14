@@ -32,5 +32,5 @@
         <x-icon :name="$attributes->get('icon')" class="me-1" />
     @endif
 
-    {!! trim($slot) ?: __('Submit') !!}
+    {!! $slot !!}
 </button>
