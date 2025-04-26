@@ -89,7 +89,7 @@
 </div>
 @endif
 
-<x-help> {!! $help ?? null !!} </x-help>
+<x-help> {!! $help ?? $attributes->get('help') !!} </x-help>
 
 @if ($hasErrorAndShow($name))
     <x-form-errors :name="$name" />

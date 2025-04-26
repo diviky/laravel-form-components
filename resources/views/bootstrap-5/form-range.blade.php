@@ -4,6 +4,6 @@
     <input {!! $attributes->except(['extra-attributes'])->merge(['class' => 'form-range' . ($hasError($name) ? ' is-invalid' : '')]) !!} type="range" {{ $wire() }} value="{{ $value }}"
         name="{{ $name }}" {{ $extraAttributes ?? '' }} id="{{ $id() }}" />
 
-    <x-help> {!! $help ?? null !!} </x-help>
+    <x-help> {!! $help ?? $attributes->get('help') !!} </x-help>
     <x-form-errors :name="$name" />
 </div>

@@ -18,6 +18,6 @@
         <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
     @endif
 
-    <x-help> {!! $help ?? null !!} </x-help>
+    <x-help> {!! $help ?? $attributes->get('help') !!} </x-help>
     <x-form-errors :name="$name" />
 </div>

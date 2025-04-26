@@ -9,7 +9,7 @@
 
     <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" class="m-0 form-check-label" />
 
-    <x-help> {!! $help ?? null !!} </x-help>
+    <x-help> {!! $help ?? $attributes->get('help') !!} </x-help>
 
     @if ($hasErrorAndShow($name))
         <x-form-errors :name="$name" />
