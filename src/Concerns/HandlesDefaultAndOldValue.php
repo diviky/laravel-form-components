@@ -8,7 +8,8 @@ trait HandlesDefaultAndOldValue
         string $name,
         mixed $bind = null,
         mixed $default = null,
-        ?string $language = null
+        ?string $language = null,
+        ?string $bindKey = null
     ): void {
         if ($this->isWired()) {
             return;
@@ -17,7 +18,7 @@ trait HandlesDefaultAndOldValue
         $inputName = static::convertBracketsToDots($name);
 
         if (!$language) {
-            $boundValue = $this->getBoundValue($bind, $inputName);
+            $boundValue = $this->getBoundValue($bind, $inputName, $bindKey);
 
             $default = is_null($boundValue) ? $default : $boundValue;
 

@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="form-group position-relative">
     @if ($floating)
         <div class="form-floating">
     @endif
@@ -6,6 +6,10 @@
     @if (!$floating)
         <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
     @endif
+
+    @isset($before)
+        {!! $before !!}
+    @endisset
 
     <textarea {!! $attributes->except(['extra-attributes'])->merge([
             'name' => $name,
@@ -22,6 +26,10 @@
     @if ($floating)
         <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
     @endif
+
+    @isset($after)
+        {!! $after !!}
+    @endisset
 
     @if ($floating)
 </div>

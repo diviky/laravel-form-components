@@ -22,6 +22,7 @@ class FormInput extends Component
         public string $type = 'text',
         public string $size = '',
         mixed $bind = null,
+        string $bindKey = '',
         public mixed $default = null,
         public ?string $language = null,
         bool $showErrors = true,
@@ -40,7 +41,11 @@ class FormInput extends Component
             $this->name = "{$name}[{$language}]";
         }
 
-        $this->setValue($name, $bind, $default, $language);
+        $this->setValue($name, $bind, $default, $language, $bindKey);
         $this->setExtraAttributes($extraAttributes);
+
+        if (is_array($this->value)) {
+            $this->value = json_encode($this->value);
+        }
     }
 }

@@ -35,12 +35,14 @@ class FormSelect extends Component
         string $label = '',
         array|Collection|null $options = [],
         mixed $bind = null,
+        string $bindKey = '',
         mixed $default = null,
         bool $multiple = false,
         bool $showErrors = true,
         bool $floating = false,
         public ?string $language = null,
         public bool $inline = false,
+        public bool $plugin = true,
         public string $placeholder = '',
         public string $size = '',
         public ?string $valueField = null,
@@ -57,7 +59,7 @@ class FormSelect extends Component
 
         $inputName = static::convertBracketsToDots($name);
 
-        $boundValue = $this->getBoundValue($bind, $inputName);
+        $boundValue = $this->getBoundValue($bind, $inputName, $bindKey);
 
         $default = is_null($boundValue) ? $default : $boundValue;
 

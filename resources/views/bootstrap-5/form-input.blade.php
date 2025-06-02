@@ -1,6 +1,7 @@
 <div @class([
     'form-group' => !$inline,
     'd-none' => $type === 'hidden',
+    'position-relative',
     'form-floating' => $floating,
 ])>
 
@@ -11,7 +12,8 @@
     <div @class([
         'input-group' =>
             isset($prepend) || isset($append) || isset($before) || isset($after),
-        'input-icon' => @isset($icon),
+        'input-icon' =>
+            @isset($icon) || $attributes->has('icon'),
         'input-group-flat' => $attributes->has('flat'),
         'input-group-sm' => (isset($prepend) || isset($append)) && $size == 'sm',
         'input-group-lg' => (isset($prepend) || isset($append)) && $size == 'lg',
@@ -32,6 +34,12 @@
                 <x-icon :name="$icon" />
             </span>
         @endisset
+
+        @if ($attributes->has('icon'))
+            <span class="input-icon-addon">
+                <x-icon :name="$attributes->get('icon')" />
+            </span>
+        @endif
 
         <input {!! $attributes->except(['extra-attributes'])->merge([
                 'type' => $type,

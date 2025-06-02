@@ -17,7 +17,8 @@ class FormRadio extends Component
         string $name = '',
         string $label = '',
         mixed $value = 1,
-        int|string|null $bind = null,
+        mixed $bind = null,
+        string $bindKey = '',
         ?bool $default = false,
         bool $showErrors = false,
         public ?array $settings = [],
@@ -37,7 +38,7 @@ class FormRadio extends Component
         }
 
         if (!session()->hasOldInput() && $this->isNotWired()) {
-            $boundValue = $this->getBoundValue($bind, $inputName);
+            $boundValue = $this->getBoundValue($bind, $inputName, $bindKey);
 
             if (!is_null($boundValue)) {
                 $this->checked = $boundValue == $this->value;

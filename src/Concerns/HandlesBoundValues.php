@@ -68,10 +68,14 @@ trait HandlesBoundValues
      * @param  mixed  $bind
      * @return mixed
      */
-    protected function getBoundValue($bind, string $name)
+    protected function getBoundValue($bind, string $name, ?string $bindKey = null)
     {
         if ($bind === false) {
             return null;
+        }
+
+        if ($bindKey) {
+            $name = $bindKey;
         }
 
         $bind = $bind ?: $this->getBoundTarget();

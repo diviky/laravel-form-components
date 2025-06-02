@@ -42,7 +42,7 @@
                     'form-select-sm' => $size == 'sm',
                     'form-select-lg' => $size == 'lg',
                     'is-invalid' => $hasError($name),
-                ]) !!}>
+                ]) !!} @if ($plugin && $attributes->whereStartsWith('data-select')->isEmpty()) data-select @endif>
 
             {{ $before ?? '' }}
 

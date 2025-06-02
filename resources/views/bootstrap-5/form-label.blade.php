@@ -16,5 +16,9 @@
                 <x-icon name="help" />
             </span>
         @endif
+
+        @isset($description)
+            <div class="form-label-description">{!! $description !!}</div>
+        @endisset
     </label>
 @endif

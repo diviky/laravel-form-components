@@ -25,6 +25,7 @@ class FormCheckbox extends Component
         string $label = '',
         mixed $value = 1,
         mixed $bind = null,
+        string $bindKey = '',
         ?bool $default = false,
         bool $showErrors = true,
         public mixed $copy = '0',
@@ -47,7 +48,7 @@ class FormCheckbox extends Component
         }
 
         if (!session()->hasOldInput() && $this->isNotWired()) {
-            $boundValue = $this->getBoundValue($bind, $inputName);
+            $boundValue = $this->getBoundValue($bind, $inputName, $bindKey);
 
             if ($boundValue instanceof Arrayable) {
                 $boundValue = $boundValue->toArray();
