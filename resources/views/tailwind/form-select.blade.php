@@ -18,7 +18,7 @@
             @endif
 
             {!! $attributes->merge([
-                'class' => ($label ? 'mt-1 ' : '') . 'block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                'class' => ($label ? 'mt-1 ' : '') . 'block w-full mt-1 rounded-md border-gray-300 shadow-xs focus:border-indigo-300 focus:ring-3 focus:ring-indigo-200 focus:ring-opacity-50'
             ]) !!}>
 
             @if($placeholder)

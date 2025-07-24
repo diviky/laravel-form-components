@@ -16,7 +16,7 @@ return [
     /**
      * How the form filed should display
      */
-    'form_style' => null,
+    'form_style' => env('COMPONENTS_FORM_STYLE'),
 
     'components' => [
         'form' => [
