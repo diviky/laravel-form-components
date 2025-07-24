@@ -1,6 +1,6 @@
 <div>
-    <label class="inline-flex items-center">
-        <input {!! $attributes->merge(['class' => 'rounded-full border-gray-300 text-indigo-600 shadow-xs focus:border-indigo-300 focus:ring-3 focus:ring-indigo-200 focus:ring-opacity-50']) !!}
+    <label class="inline-flex items-center"></label>
+        <input {!! $attributes->merge(['class' => 'rounded-full border-gray-300 text-indigo-600 shadow-xs focus:border-indigo-300 focus:ring-3 focus:ring-indigo-200/50']) !!}
             type="radio"
 
             @if($isWired())
