@@ -6,6 +6,8 @@
     @if ($attributes->has('render')) data-render="true" @endif
     @if ($attributes->has('close') || $attributes->has('hide')) data-hide="true" @endif @if ($attributes->has('easy')) easysubmit @endif
     @if ($hasFiles) enctype="multipart/form-data" @endif
+    @if ($attributes->has('create')) easysubmit data-reset="true" data-render="true" data-hide="true" @endif
+    @if ($attributes->has('update')) easysubmit data-render="true" @endif
     @unless ($spellcheck)
         spellcheck="false"
     @endunless>
