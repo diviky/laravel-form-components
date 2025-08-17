@@ -84,6 +84,8 @@ class FormSelect extends Component
         $this->childrenField = $childrenField ?? 'children';
 
         $this->options = $this->normalizeOptions($options);
+
+        // dd($this->options);
     }
 
     public function isSelected(null|string|int $key): bool
@@ -120,10 +122,17 @@ class FormSelect extends Component
             ->map(function ($value, $key) use ($isList) {
                 // If the key is not numeric, we're going to assume this is the value.
                 if (!is_numeric($key) || !$isList) {
-                    return [
+                    $values = [
                         $this->valueField => $key,
                         $this->labelField => $value,
                     ];
+
+                    if ($this->isIterable($value)) {
+                        $values[$this->childrenField] = $this->normalizeOptions($value);
+                        $values[$this->labelField] = $key;
+                    }
+
+                    return $values;
                 }
 
                 // If the value is a simple value, we need to convert it to an array.
@@ -135,6 +144,11 @@ class FormSelect extends Component
                 }
 
                 return $value;
-            });
+            })->values();
+    }
+
+    protected function isIterable(mixed $value): bool
+    {
+        return is_iterable($value) || $value instanceof Model || is_array($value) || $value instanceof Collection;
     }
 }
