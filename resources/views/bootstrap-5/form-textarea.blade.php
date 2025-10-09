@@ -36,8 +36,5 @@
 @endif
 
 <x-help> {!! $help ?? $attributes->get('help') !!} </x-help>
-
-@if ($hasErrorAndShow($name))
-    <x-form-errors :name="$name" />
-@endif
+<x-form-errors :name="$name" />
 </div>
