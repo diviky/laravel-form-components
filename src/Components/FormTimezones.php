@@ -31,6 +31,7 @@ class FormTimezones extends FormSelect
 
         // Timezone specific
         public array|string|bool|null $only = null,
+        public mixed $enabled = true,
     ) {
         parent::__construct(
             name: $name,

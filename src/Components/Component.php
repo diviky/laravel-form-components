@@ -27,6 +27,8 @@ abstract class Component extends BaseComponent
 
     public ?string $name = null;
 
+    public mixed $enabled = true;
+
     /**
      * {@inheritDoc}
      */
@@ -185,5 +187,10 @@ abstract class Component extends BaseComponent
     protected function ensureAttribute(): void
     {
         $this->attributes = $this->attributes ?: $this->newAttributeBag();
+    }
+
+    public function shouldRender()
+    {
+        return $this->enabled;
     }
 }

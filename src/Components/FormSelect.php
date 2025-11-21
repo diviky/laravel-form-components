@@ -51,6 +51,7 @@ class FormSelect extends Component
         public ?string $childrenField = null,
         public ?array $settings = [],
         string|HtmlString|array|Collection|null $extraAttributes = null,
+        public mixed $enabled = true,
     ) {
         $this->name = $name;
         $this->label = $label;

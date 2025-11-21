@@ -29,7 +29,8 @@ class FormInput extends Component
         public bool $floating = false,
         public bool $inline = false,
         string|HtmlString|array|Collection|null $extraAttributes = null,
-        public ?array $settings = []
+        public ?array $settings = [],
+        public mixed $enabled = true,
     ) {
         $this->name = $name;
         $this->label = $label;

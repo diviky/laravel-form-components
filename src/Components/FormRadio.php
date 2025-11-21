@@ -23,6 +23,7 @@ class FormRadio extends Component
         bool $showErrors = false,
         public ?array $settings = [],
         string|HtmlString|array|Collection|null $extraAttributes = null,
+        public mixed $enabled = true,
     ) {
         $this->name = $name;
         $this->label = $label;
