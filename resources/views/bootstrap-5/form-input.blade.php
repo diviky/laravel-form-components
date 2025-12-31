@@ -19,7 +19,11 @@
 
     <div @class([
         'input-group' =>
-            isset($prepend) || isset($append) || isset($before) || isset($after),
+            isset($prepend) ||
+            isset($append) ||
+            isset($before) ||
+            isset($after) ||
+            $attributes->has('length'),
         'input-icon' =>
             @isset($icon) || $attributes->has('icon'),
         'input-group-flat' => $attributes->has('flat'),
