@@ -1,4 +1,12 @@
-<div class="form-group position-relative">
+<div class="form-group position-relative"
+    @if ($attributes->has('length')) x-data="{
+        charCount: {{ strlen($value ?? '') }},
+        maxLength: {{ $attributes->get('length') }},
+        updateCount(event) {
+            this.charCount = event.target.value.length;
+        }
+    }"
+    x-init="charCount = $el.querySelector('textarea')?.value?.length || 0" @endif>
     @if ($floating)
         <div class="form-floating">
     @endif
@@ -21,7 +29,12 @@
             'form-control-sm' => $size == 'sm',
             'form-control-lg' => $size == 'lg',
             'is-invalid' => $hasError($name),
-        ]) !!} {{ $wire() }} {{ $extraAttributes ?? '' }}>{!! $value !!}</textarea>
+        ]) !!} {{ $wire() }} {{ $extraAttributes ?? '' }}
+        @if ($attributes->has('length')) @input="updateCount($event)" @endif>{!! $value !!}</textarea>
+
+    @if ($attributes->has('length'))
+        <div class="form-text text-muted text-sm text-end mt-1" x-text="`${charCount}/${maxLength}`"></div>
+    @endif
 
     @if ($floating)
         <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />

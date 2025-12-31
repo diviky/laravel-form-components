@@ -1,3 +1,3 @@
-@if($label)
-    <span {!! $attributes->merge(['class' => 'text-gray-700']) !!}>{{ $label }}</span>
+@if ($label)
+    <span {!! $attributes->merge(['class' => 'text-gray-500']) !!}>{{ $label }}</span>
 @endif
