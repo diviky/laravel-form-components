@@ -23,7 +23,7 @@
         "symfony/http-foundation": "^6.0|^7.0"
     },
     "require-dev": {
-        "diviky/code-analysis": "^3.0",
+        "diviky/code-analysis": "^4.0",
         "livewire/livewire": "^3.4",
         "spatie/laravel-translatable": "^6.0",
         "symfony/dom-crawler": "^6.0"
