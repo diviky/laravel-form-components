@@ -4,17 +4,28 @@
     'position-relative',
     'form-floating' => $floating,
 ])
-    @if ($attributes->has('length')) x-data="{
+    @if ($attributes->has('count')) x-data="{
         charCount: {{ strlen($value ?? '') }},
-        maxLength: {{ $attributes->get('length') }},
+        maxLength: {{ $attributes->get('count') }},
         updateCount(event) {
             this.charCount = event.target.value.length;
+        },
+        init() {
+            this.updateCharCount();
+        },
+        updateCharCount() {
+            this.$nextTick(() => {
+                const input = this.$el.querySelector('input');
+                if (input) {
+                    this.charCount = input.value.length;
+                }
+            });
         }
     }"
-    x-init="charCount = $el.querySelector('input')?.value?.length || 0" @endif>
+    x-init="init()" x-effect="updateCharCount()" @endif>
 
     @if (!$floating)
-        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$id()" />
     @endif
 
     <div @class([
@@ -23,7 +34,7 @@
             isset($append) ||
             isset($before) ||
             isset($after) ||
-            $attributes->has('length'),
+            $attributes->has('count'),
         'input-icon' =>
             @isset($icon) || $attributes->has('icon'),
         'input-group-flat' => $attributes->has('flat'),
@@ -55,7 +66,7 @@
 
         <input {!! $attributes->except(['extra-attributes'])->merge([
                 'type' => $type,
-                'name' => $name,
+                'name' => $name(),
                 'id' => $id(),
                 'placeholder' => null,
                 'value' => $value,
@@ -64,9 +75,9 @@
                 'form-control-color' => $type === 'color',
                 'form-control-sm' => $size == 'sm',
                 'form-control-lg' => $size == 'lg',
-                'is-invalid' => $hasError($name),
+                'is-invalid' => $hasError($name()),
             ]) !!} {{ $extraAttributes ?? '' }} {{ $wire() }}
-            @if ($attributes->has('length')) @input="updateCount($event)" @endif />
+            @if ($attributes->has('count')) @input="updateCount($event)" @endif />
 
         @isset($append)
             <x-form-input-group-text :attributes="$append->attributes">
@@ -74,7 +85,7 @@
             </x-form-input-group-text>
         @endisset
 
-        @if ($attributes->has('length'))
+        @if ($attributes->has('count'))
             <span class="input-group-text">
                 <span class="text-muted text-sm" x-text="`${charCount}/${maxLength}`"></span>
             </span>
@@ -86,10 +97,10 @@
     </div>
 
     @if ($floating)
-        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$id()" />
     @endif
 
 
     <x-help> {!! $help ?? $attributes->get('help') !!} </x-help>
-    <x-form-errors :name="$name" />
+    <x-form-errors :name="$name()" />
 </div>

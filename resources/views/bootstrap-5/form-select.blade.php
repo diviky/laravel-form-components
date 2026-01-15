@@ -6,7 +6,7 @@
     @endif
 
     @if (!$floating)
-        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$id()" />
     @endif
 
     <div @class([
@@ -35,13 +35,13 @@
                     'placeholder' => $placeholder,
                     'value-field' => $valueField,
                     'label-field' => $labelField,
-                    'name' => $name,
+                    'name' => $name(),
                     'data-selected' => $values,
                 ])->class([
                     'form-select' => true,
                     'form-select-sm' => $size == 'sm',
                     'form-select-lg' => $size == 'lg',
-                    'is-invalid' => $hasError($name),
+                    'is-invalid' => $hasError($name()),
                 ]) !!} @if ($plugin && $attributes->whereStartsWith('data-select')->isEmpty()) data-select @endif>
 
             {{ $before ?? '' }}
@@ -82,7 +82,7 @@
         @endisset
     </div>
     @if ($floating)
-        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$id()" />
     @endif
 
     @if ($floating)
@@ -90,5 +90,5 @@
 @endif
 
 <x-help> {!! $help ?? $attributes->get('help') !!} </x-help>
-<x-form-errors :name="$name" />
+<x-form-errors :name="$name()" />
 </div>

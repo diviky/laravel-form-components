@@ -1,18 +1,29 @@
 <div class="form-group position-relative"
-    @if ($attributes->has('length')) x-data="{
+    @if ($attributes->has('count')) x-data="{
         charCount: {{ strlen($value ?? '') }},
-        maxLength: {{ $attributes->get('length') }},
+        maxLength: {{ $attributes->get('count') }},
         updateCount(event) {
             this.charCount = event.target.value.length;
+        },
+        init() {
+            this.updateCharCount();
+        },
+        updateCharCount() {
+            this.$nextTick(() => {
+                const textarea = this.$el.querySelector('textarea');
+                if (textarea) {
+                    this.charCount = textarea.value.length;
+                }
+            });
         }
     }"
-    x-init="charCount = $el.querySelector('textarea')?.value?.length || 0" @endif>
+    x-init="init()" x-effect="updateCharCount()" @endif>
     @if ($floating)
         <div class="form-floating">
     @endif
 
     @if (!$floating)
-        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$id()" />
     @endif
 
     @isset($before)
@@ -20,7 +31,7 @@
     @endisset
     <div class="position-relative">
         <textarea {!! $attributes->except(['extra-attributes'])->merge([
-                'name' => $name,
+                'name' => $name(),
                 'id' => $id(),
                 'placeholder' => '',
             ])->class([
@@ -28,11 +39,11 @@
                 'form-control-color' => $type === 'color',
                 'form-control-sm' => $size == 'sm',
                 'form-control-lg' => $size == 'lg',
-                'is-invalid' => $hasError($name),
+                'is-invalid' => $hasError($name()),
             ]) !!} {{ $wire() }} {{ $extraAttributes ?? '' }}
-            @if ($attributes->has('length')) @input="updateCount($event)" @endif>{!! $value !!}</textarea>
+            @if ($attributes->has('count')) @input="updateCount($event)" @endif>{!! $value !!}</textarea>
 
-        @if ($attributes->has('length'))
+        @if ($attributes->has('count'))
             <div class="form-text text-muted text-sm position-absolute top-0 end-0 pr-2"
                 x-text="`${charCount}/${maxLength}`">
             </div>
@@ -44,7 +55,7 @@
     @endisset
 
     @if ($floating)
-        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$id()" />
     @endif
 
     @if ($floating)
@@ -52,5 +63,5 @@
 @endif
 
 <x-help> {!! $help ?? $attributes->get('help') !!} </x-help>
-<x-form-errors :name="$name" />
+<x-form-errors :name="$name()" />
 </div>

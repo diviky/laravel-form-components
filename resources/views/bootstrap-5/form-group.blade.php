@@ -2,10 +2,10 @@
     {{ $attributes->only(['class'])->class([
         'form-group' => !$inline,
         'form-floating' => $floating,
-        'is-invalid' => $hasError($name),
+        'is-invalid' => $hasError($name()),
     ]) }}>
     @if (!$floating)
-        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$id()" />
     @endif
 
     <div @class([
@@ -15,9 +15,9 @@
     </div>
 
     @if ($floating)
-        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$attributes->get('id') ?: $id()" />
+        <x-form-label :label="$label" :required="$isRequired()" :title="$attributes->get('title')" :for="$id()" />
     @endif
 
     <x-help> {!! $help ?? $attributes->get('help') !!} </x-help>
-    <x-form-errors :name="$name" />
+    <x-form-errors :name="$name()" />
 </div>

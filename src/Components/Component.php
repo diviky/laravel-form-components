@@ -81,6 +81,10 @@ abstract class Component extends BaseComponent
      */
     public function id(): string
     {
+        if ($this->attributes->has('id')) {
+            return $this->attributes->get('id');
+        }
+
         if ($this->id) {
             return $this->id;
         }
