@@ -1,6 +1,6 @@
 <input {!! $attributes->except(['extra-attributes'])->merge([
         'type' => 'hidden',
-        'name' => $name(),
+        'name' => $inputName(),
         'id' => $id(),
         'placeholder' => null,
         'value' => $value,
@@ -9,5 +9,5 @@
         'form-control-color' => $type === 'color',
         'form-control-sm' => $size == 'sm',
         'form-control-lg' => $size == 'lg',
-        'is-invalid' => $hasError($name()),
+        'is-invalid' => $hasError($inputName()),
     ]) !!} {{ $extraAttributes ?? '' }} {{ $wire() }} />

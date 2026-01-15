@@ -31,7 +31,7 @@
     @endisset
     <div class="position-relative">
         <textarea {!! $attributes->except(['extra-attributes'])->merge([
-                'name' => $name(),
+                'name' => $inputName(),
                 'id' => $id(),
                 'placeholder' => '',
             ])->class([
@@ -39,7 +39,7 @@
                 'form-control-color' => $type === 'color',
                 'form-control-sm' => $size == 'sm',
                 'form-control-lg' => $size == 'lg',
-                'is-invalid' => $hasError($name()),
+                'is-invalid' => $hasError($inputName()),
             ]) !!} {{ $wire() }} {{ $extraAttributes ?? '' }}
             @if ($attributes->has('count')) @input="updateCount($event)" @endif>{!! $value !!}</textarea>
 
@@ -63,5 +63,5 @@
 @endif
 
 <x-help> {!! $help ?? $attributes->get('help') !!} </x-help>
-<x-form-errors :name="$name()" />
+<x-form-errors :name="$inputName()" />
 </div>

@@ -45,13 +45,18 @@ trait HandlesDefaultAndOldValue
         return $this->value;
     }
 
-    protected function setName(string $name = '', ?string $language = null, $wired = false): string
+    protected function setName(string $name = '', ?string $language = null, $notWired = false): ?string
     {
-        if (!empty($name) && !$wired) {
-            return $name;
+        if (!empty($name) || !$notWired) {
+            return $name ?? '';
         }
 
         $name = $this->getWireName($this->attributes);
+
+        if (empty($name)) {
+            return '';
+        }
+
         $name = static::convertDotsToBrackets($name);
         $this->name = $name;
 
@@ -84,8 +89,8 @@ trait HandlesDefaultAndOldValue
         return preg_replace('/\.(\w+)/', '[$1]', $name);
     }
 
-    public function name(): string
+    public function inputName(): string
     {
-        return $this->setName($this->name, $this->language ?? null, $this->isWired());
+        return $this->setName($this->name, $this->language ?? null, $this->isNotWired());
     }
 }

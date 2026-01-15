@@ -6,6 +6,8 @@ class FormErrors extends Component
 {
     public string $bag;
 
+    public string $inputErrorName;
+
     /**
      * Create a new component instance.
      *
@@ -18,7 +20,7 @@ class FormErrors extends Component
         public ?string $inputId = null,
         public bool $all = false,
     ) {
-        $this->name = static::convertBracketsToDots($name);
+        $this->inputErrorName = static::convertBracketsToDots($name);
 
         $this->inputId = $inputId ?? $this->name;
         $this->tag = $tag ?? 'div';

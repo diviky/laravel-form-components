@@ -35,13 +35,13 @@
                     'placeholder' => $placeholder,
                     'value-field' => $valueField,
                     'label-field' => $labelField,
-                    'name' => $name(),
+                    'name' => $inputName(),
                     'data-selected' => $values,
                 ])->class([
                     'form-select' => true,
                     'form-select-sm' => $size == 'sm',
                     'form-select-lg' => $size == 'lg',
-                    'is-invalid' => $hasError($name()),
+                    'is-invalid' => $hasError($inputName()),
                 ]) !!} @if ($plugin && $attributes->whereStartsWith('data-select')->isEmpty()) data-select @endif>
 
             {{ $before ?? '' }}
@@ -90,5 +90,5 @@
 @endif
 
 <x-help> {!! $help ?? $attributes->get('help') !!} </x-help>
-<x-form-errors :name="$name()" />
+<x-form-errors :name="$inputName()" />
 </div>

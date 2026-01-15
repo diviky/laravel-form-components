@@ -66,7 +66,7 @@
 
         <input {!! $attributes->except(['extra-attributes'])->merge([
                 'type' => $type,
-                'name' => $name(),
+                'name' => $inputName(),
                 'id' => $id(),
                 'placeholder' => null,
                 'value' => $value,
@@ -75,7 +75,7 @@
                 'form-control-color' => $type === 'color',
                 'form-control-sm' => $size == 'sm',
                 'form-control-lg' => $size == 'lg',
-                'is-invalid' => $hasError($name()),
+                'is-invalid' => $hasError($inputName()),
             ]) !!} {{ $extraAttributes ?? '' }} {{ $wire() }}
             @if ($attributes->has('count')) @input="updateCount($event)" @endif />
 
@@ -102,5 +102,5 @@
 
 
     <x-help> {!! $help ?? $attributes->get('help') !!} </x-help>
-    <x-form-errors :name="$name()" />
+    <x-form-errors :name="$inputName()" />
 </div>

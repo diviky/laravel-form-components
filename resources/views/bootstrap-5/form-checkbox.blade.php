@@ -11,15 +11,15 @@
         'm-0' => null !== $attributes->get('compact'),
     ])>
         @if ($copy !== false)
-            <input type="hidden" value="{{ $copy }}" name="{{ $name() }}" />
+            <input type="hidden" value="{{ $copy }}" name="{{ $inputName() }}" />
         @endif
 
         <input {!! $attributes->except(['extra-attributes'])->class([
-                'is-invalid' => $hasError($name()),
+                'is-invalid' => $hasError($inputName()),
                 'form-check-input',
             ])->merge([
                 'id' => $id(),
-                'name' => $name(),
+                'name' => $inputName(),
                 'type' => 'checkbox',
                 'value' => $value,
             ]) !!} {{ $extraAttributes ?? '' }} {{ $wire() }} @checked($checked) />
@@ -32,5 +32,5 @@
         </span>
     </div>
 
-    <x-form-errors :name="$name()" />
+    <x-form-errors :name="$inputName()" />
 </div>
